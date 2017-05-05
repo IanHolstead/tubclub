@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager> {
 
-	public enum State { Null };
+	public enum State { Null, Paused };
 	public State state;
 
 	void Awake(){
