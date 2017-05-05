@@ -15,6 +15,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
+		Debug.Log(gamepad.GetButtonDown(ActionKeyCode.GamepadA));
 	}
 }
