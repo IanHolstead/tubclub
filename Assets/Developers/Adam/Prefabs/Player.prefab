@@ -188,6 +188,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07c3bdf0432dcd4ca3abdfdb70d5104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxRadius: 100
+  RotationSpeedOverRadius:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 5
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 100
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  radius: 0
   PlayerNum: 1
   camera: {fileID: 20275532155928628}
 --- !u!124 &124120616953793636
