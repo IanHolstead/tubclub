@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Player Variables")]
     public int PlayerNum; //[1-4]
-    public float HarpoonForce;
+    public float HarpoonInitialVelocityMagnitude;
 
     [Header("Camera Variables")]
     public float verticalRange = 45f;
