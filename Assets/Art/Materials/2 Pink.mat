@@ -6,7 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD:Assets/Art/Materials/2 Pink.mat
   m_Name: 2 Pink
+=======
+  m_Name: Metal Dark
+>>>>>>> origin/master:Assets/Materials/Metal Dark.mat
   m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
