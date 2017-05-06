@@ -412,17 +412,23 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
-      value: 10
-      inSlope: -0.0775534
-      outSlope: -0.0975
-      tangentMode: 65
+      time: 1
+      value: 5
+      inSlope: -1.1184473
+      outSlope: -1.1184473
+      tangentMode: 0
     - serializedVersion: 2
-      time: 100
-      value: 0.25
-      inSlope: -0.0975
-      outSlope: -0.00025408834
+      time: 10.5
+      value: 0.5
+      inSlope: -0.47368422
+      outSlope: -0.8517702
       tangentMode: 69
+    - serializedVersion: 2
+      time: 10.96961
+      value: 0.1
+      inSlope: 0.024297912
+      outSlope: 0.024297912
+      tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
@@ -433,6 +439,7 @@ MonoBehaviour:
   PlayerNum: 1
   HarpoonInitialVelocityMagnitude: 100
   HarpoonTrajectorySamples: 50
+  HarpoonInitialVelocityMagnitude: 0
   verticalRange: 45
   horizontalRange: 90
   cameraX: 0
