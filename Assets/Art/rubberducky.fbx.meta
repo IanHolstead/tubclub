@@ -8,15 +8,35 @@ ModelImporter:
     100000: Cylinder
     100002: Duck
     100004: //RootNode
+    100006: Guns
+    100008: Left Barrel
+    100010: Right Barrel
+    100012: String
     400000: Cylinder
     400002: Duck
     400004: //RootNode
+    400006: Guns
+    400008: Left Barrel
+    400010: Right Barrel
+    400012: String
     2300000: Cylinder
     2300002: Duck
+    2300004: Guns
+    2300006: Left Barrel
+    2300008: Right Barrel
+    2300010: String
     3300000: Cylinder
     3300002: Duck
+    3300004: Guns
+    3300006: Left Barrel
+    3300008: Right Barrel
+    3300010: String
     4300000: Cylinder
     4300002: Duck
+    4300004: Left Barrel
+    4300006: Right Barrel
+    4300008: String
+    4300010: Guns
   materials:
     importMaterials: 1
     materialName: 0
