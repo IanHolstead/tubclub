@@ -351,6 +351,18 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1419343555057546, guid: 67477ee1d2b9a9b4194b8027e7535d97, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575139835998302, guid: 67477ee1d2b9a9b4194b8027e7535d97, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419343555057546, guid: 67477ee1d2b9a9b4194b8027e7535d97, type: 2}
+      propertyPath: m_Name
+      value: xortex
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 67477ee1d2b9a9b4194b8027e7535d97, type: 2}
   m_IsPrefabParent: 0
