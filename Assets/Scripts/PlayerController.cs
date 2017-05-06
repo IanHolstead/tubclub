@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour {
 
     Gamepad gamepad;
 
-    public enum State { Null, Paused, Playing };
+    public enum State { Null, Paused, Alive, Dead };
     public State state;
 
     // Use this for initialization
@@ -48,13 +48,20 @@ public class PlayerController : MonoBehaviour {
                 UpdateSteering();
                 UpdatePhysics();
                 UpdateCamera();
-                break;
+
+                if(gamepad.GetButton(ActionKeyCode.GamepadA)){
+                    HarpoonController testSpawn = Instantiate(HarpoonPrefab, transform.position + Vector3.up * 3, Quaternion.identity).GetComponent<HarpoonController>();
+                    testSpawn.Fire(PlayerNum, camera.transform.forward * 30000);
+                }
+
+            break;
         }
     }
 
     public void Setup(int playerNum){ //Public call to setup our player
         this.PlayerNum = playerNum; //Set our player number
         this.name = "Player " + PlayerNum; //Set our name
+        this.state = State.Alive;
         gamepad = ControllerManager.instance.RequestSpecificGamepad(PlayerNum-1); //Get our gamepad reference
         SetLayerRecursive(UICanvas.transform, "UI Player " + PlayerNum); //Set the player's UI's layer
         
@@ -66,6 +73,10 @@ public class PlayerController : MonoBehaviour {
 
         //Turn on ONLY our layer mask
         camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum ));
+     }
+
+     public void HitByHarpoon(){
+        this.state = State.Dead;
      }
 
     void SetLayerRecursive(Transform obj, string layerName){
@@ -104,7 +115,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateSteering(){
-        Debug.Log(gamepad.GetAxis(AxisCode.GamepadAxisLeftX));
         radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 50;
     }
 
