@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Component References")]
     public Camera camera;
+    public GameObject UICanvas;
 
     Gamepad gamepad;
 
@@ -50,7 +51,33 @@ public class PlayerController : MonoBehaviour {
         this.PlayerNum = playerNum; //Set our player number
         this.name = "Player " + PlayerNum; //Set our name
         gamepad = ControllerManager.instance.RequestSpecificGamepad(PlayerNum-1); //Get our gamepad reference
+        SetLayerRecursive(UICanvas.transform, "UI Player " + PlayerNum); //Set the player's UI's layer
+        
+        //Turn off all the layer masks for each player UI
+        camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 1"));
+        camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 2"));
+        camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 3"));
+        camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 4"));
+
+        //Turn on ONLY our layer mask
+        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum));
+     }
+
+    void SetLayerRecursive(Transform obj, string layerName){
+        obj.gameObject.layer = LayerMask.NameToLayer("UI Player " + PlayerNum);
+        foreach(Transform child in obj.transform){
+            SetLayerRecursive(child, layerName);
+        }
     }
+
+    // function SetLayerRecursively( obj : GameObject, newLayer : int  ){
+    //     obj.layer = newLayer;
+       
+    //     for( var child : Transform in obj.transform )
+    //     {
+    //         SetLayerRecursively( child.gameObject, newLayer );
+    //     }
+    // }
 
     float nfmod(float a, float b){
         return a - b * Mathf.Floor(a / b);
