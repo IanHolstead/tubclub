@@ -6,6 +6,7 @@ using ControlWrapping;
 
 [AddComponentMenu("Controllers/PlayerController")]
 
+[RequireComponent(typeof(LineRenderer))]
 public class PlayerController : MonoBehaviour {
 
     [Header("Physics")]
@@ -30,33 +31,57 @@ public class PlayerController : MonoBehaviour {
     public Camera camera;
     public GameObject UICanvas;
 
+    LineRenderer lr;
+
     Gamepad gamepad;
 
     public enum State { Null, Paused, Alive, Dead };
     public State state;
 
+    void Awake(){
+        lr = GetComponent<LineRenderer>();
+    }
+
     // Use this for initialization
     void Start () {
 
     }
-    
-    // Update is called once per frame
-    void Update () {
-        // Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
-        switch (GameManager.Instance.state){
-            case GameManager.State.Playing:
-                UpdateSteering();
-                UpdatePhysics();
-                UpdateCamera();
 
-                if(gamepad.GetButton(ActionKeyCode.GamepadA)){
-                    HarpoonController testSpawn = Instantiate(HarpoonPrefab, transform.position + Vector3.up * 3, Quaternion.identity).GetComponent<HarpoonController>();
-                    testSpawn.Fire(PlayerNum, camera.transform.forward * 30000);
-                }
+    public Vector3 PlotTrajectoryAtTime (Vector3 start, Vector3 startVelocity, float time) {
+        return start + startVelocity*time + Physics.gravity*time*time*0.5f;
+    }
 
-            break;
+    public void PlotTrajectory (Vector3 start, Vector3 startVelocity, float timestep, float maxTime) {
+        Vector3 prev = start;
+        for (int i=1;;i++) {
+            float t = timestep*i;
+            if (t > maxTime) break;
+            Vector3 pos = PlotTrajectoryAtTime (start, startVelocity, t);
+            if (Physics.Linecast (prev,pos)) break;
+            Debug.DrawLine (prev,pos,Color.red);
+            prev = pos;
         }
     }
+
+    // Update is called once per frame
+ void Update () {
+        // Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
+    switch (GameManager.Instance.state){
+        case GameManager.State.Playing:
+
+        UpdateSteering();
+        UpdatePhysics();
+        UpdateCamera();
+
+        PlotTrajectory(transform.position + Vector3.up * 3, camera.transform.forward * 30000, 0.01f, 10.0f);
+        if(gamepad.GetButton(ActionKeyCode.GamepadA)){
+            HarpoonController testSpawn = Instantiate(HarpoonPrefab, transform.position + Vector3.up * 3, Quaternion.identity).GetComponent<HarpoonController>();
+            testSpawn.Fire(PlayerNum, camera.transform.forward * 30000);
+        }
+
+        break;
+    }
+}
 
     public void Setup(int playerNum){ //Public call to setup our player
         this.PlayerNum = playerNum; //Set our player number
@@ -73,11 +98,11 @@ public class PlayerController : MonoBehaviour {
 
         //Turn on ONLY our layer mask
         camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum ));
-     }
+    }
 
-     public void HitByHarpoon(){
+    public void HitByHarpoon(){
         this.state = State.Dead;
-     }
+    }
 
     void SetLayerRecursive(Transform obj, string layerName){
         obj.gameObject.layer = LayerMask.NameToLayer("UI Player " + PlayerNum);
@@ -85,15 +110,6 @@ public class PlayerController : MonoBehaviour {
             SetLayerRecursive(child, layerName);
         }
     }
-
-    // function SetLayerRecursively( obj : GameObject, newLayer : int  ){
-    //     obj.layer = newLayer;
-       
-    //     for( var child : Transform in obj.transform )
-    //     {
-    //         SetLayerRecursively( child.gameObject, newLayer );
-    //     }
-    // }
 
     float nfmod(float a, float b){
         return a - b * Mathf.Floor(a / b);
