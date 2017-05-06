@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 [AddComponentMenu("Managers/GameManager")]
 
 public class GameManager : Singleton<GameManager> {
-
     [Header("Game Variables")]
-    public List<PlayerController> Players; //Player #1 is at index 0
+    [Range(2,4)]
+    public int numberOfPlayers = 4;
 
     [Header("Prefab References")]
     public GameObject PlayerPrefab;
+
+    [Header("Debug Variables")]
+    public List<PlayerController> Players; //Player #1 is at index 0
 
     public enum State { Null, Paused, Playing };
     public State state;
@@ -22,7 +25,7 @@ public class GameManager : Singleton<GameManager> {
 
     // Use this for initialization
     void Start () {
-        SpawnPlayers(4);
+        SpawnPlayers(numberOfPlayers);
     }
     
     // Update is called once per frame
@@ -32,15 +35,16 @@ public class GameManager : Singleton<GameManager> {
 
     public void SpawnPlayers(int num){ //Spawn the players, given number of players to spawn
 
-        if(num < 2 || num > 4) { //If we're trying to spawn an invalid # of player
-            Debug.LogError("Invalid number of players: " + num);
-            return;
-        }
+        //TODO: remove me, should no longer be needed
+        //if(num < 2 || num > 4) { //If we're trying to spawn an invalid # of player
+        //    Debug.LogError("Invalid number of players: " + num);
+        //    return;
+        //}
 
         Players = new List<PlayerController>(); //Clear the list
 
         float degPerPlayer = 2 * Mathf.PI / num; //Calculate angle between each player spawn in radians
-        float spawnRadius = 5;
+        float spawnRadius = 10;
 
         for(int i = 1; i < num+1; i++){ //For each we want to
             Vector3 newPos = new Vector3(Mathf.Sin(degPerPlayer * i) * spawnRadius, 0, Mathf.Cos(degPerPlayer * i) * spawnRadius); //Calculate their spawn position
