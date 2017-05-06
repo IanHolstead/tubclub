@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class HarpoonController : MonoBehaviour {
 
-
+	int firedBy;
 	Rigidbody rb;
 
 	void Awake(){
@@ -16,7 +16,6 @@ public class HarpoonController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Fire(1);
 	}
 	
 	// Update is called once per frame
@@ -24,7 +23,8 @@ public class HarpoonController : MonoBehaviour {
 		
 	}
 
-	void Fire(int playerNum){
-		rb.AddForce(transform.forward * 100);
+	void Fire(int playerNum, Vector3 direction){
+		firedBy = playerNum;
+		rb.AddForce(direction.normalized * 3000);
 	}
 }

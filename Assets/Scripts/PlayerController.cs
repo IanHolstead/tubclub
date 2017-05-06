@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour {
                 UpdateSteering();
                 UpdatePhysics();
                 UpdateCamera();
+                if(gamepad.GetButton(ActionKeyCode.GamepadA)){
+                    HarpoonController testSpawn = Instantiate(HarpoonPrefab, transform.position, Quaternion.identity).GetComponent<HarpoonController>();
+
+                }
             break;
         }
     }
