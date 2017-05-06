@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour {
         float newCameraX = gamepad.GetAxis(AxisCode.GamepadAxisRightX);
         float newCameraY = gamepad.GetAxis(AxisCode.GamepadAxisRightY);
 
+        //TODO: this should depend on delta time
         newCameraX = Mathf.Lerp(cameraX, GameFunctions.MapRange(newCameraX, 0, 1, 0, horizontalRange), .4f);
         newCameraY = Mathf.Lerp(cameraY, GameFunctions.MapRange(newCameraY, 0, 1, 0, verticalRange), .4f);
 
