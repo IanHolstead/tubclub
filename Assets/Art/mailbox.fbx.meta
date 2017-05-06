@@ -1,37 +1,15 @@
 fileFormatVersion: 2
-guid: 68c7869b5cc499b47b3f589d30f5b1f0
-timeCreated: 1494020716
+guid: c1fe21f8049689342994ddfd9c40cb09
+timeCreated: 1494088807
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Legs
-    100002: Tub
-    100004: //RootNode
-    100006: Water
-    100008: Water.001
-    100010: Vortex
-    400000: Legs
-    400002: Tub
-    400004: //RootNode
-    400006: Water
-    400008: Water.001
-    400010: Vortex
-    2300000: Legs
-    2300002: Tub
-    2300004: Water
-    2300006: Water.001
-    2300008: Vortex
-    3300000: Legs
-    3300002: Tub
-    3300004: Water
-    3300006: Water.001
-    3300008: Vortex
-    4300000: Legs
-    4300002: Water
-    4300004: Tub
-    4300006: Water.001
-    4300008: Vortex
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Mailbox
   materials:
     importMaterials: 1
     materialName: 0
@@ -63,7 +41,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
