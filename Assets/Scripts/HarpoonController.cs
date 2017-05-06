@@ -7,23 +7,25 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class HarpoonController : MonoBehaviour {
 
-	int firedBy;
+	public int firedBy;
 	Rigidbody rb;
 
 	void Awake(){
 		rb = GetComponent<Rigidbody>();
 	}
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	void OnTriggerEnter(Collider other) {
+		if(other.tag == "Player"){
+			PlayerController hitPlayer = other.GetComponent<PlayerController>();
+			if(hitPlayer != null){
+				if(hitPlayer.PlayerNum != firedBy){
+					hitPlayer.HitByHarpoon();
+				}
+			}
+		}
 	}
 
-	void Fire(int playerNum, Vector3 direction){
+	public void Fire(int playerNum, Vector3 direction){
 		firedBy = playerNum;
 		rb.AddForce(direction.normalized * 3000);
 	}
