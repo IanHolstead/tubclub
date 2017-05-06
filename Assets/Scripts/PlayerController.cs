@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Player Variables")]
     public int PlayerNum; //[1-4]
+    public float HarpoonInitialVelocityMagnitude;
 
     [Header("Camera Variables")]
     public float verticalRange = 45f;
@@ -47,41 +48,38 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    public Vector3 PlotTrajectoryAtTime (Vector3 start, Vector3 startVelocity, float time) {
-        return start + startVelocity*time + Physics.gravity*time*time*0.5f;
+    public Vector3 PlotTrajectoryAtTime (Vector3 initialPosition, Vector3 initialVelocity, float time) {
+        return initialPosition + (initialVelocity*time) + (Physics.gravity*time*time*0.5f);
     }
 
-    public void PlotTrajectory (Vector3 start, Vector3 startVelocity, float timestep, float maxTime) {
-        Vector3 prev = start;
+    public void PlotTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float timestep, float maxTime) {
+
+        Vector3 prev = initialPosition;
+
         for (int i=1;;i++) {
             float t = timestep*i;
             if (t > maxTime) break;
-            Vector3 pos = PlotTrajectoryAtTime (start, startVelocity, t);
-            if (Physics.Linecast (prev,pos)) break;
+            Vector3 pos = PlotTrajectoryAtTime (initialPosition, initialVelocity, t);
+            //if (Physics.Linecast (prev,pos)) break;
             Debug.DrawLine (prev,pos,Color.red);
             prev = pos;
         }
     }
 
     // Update is called once per frame
- void Update () {
+    void Update () {
         // Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
-    switch (GameManager.Instance.state){
-        case GameManager.State.Playing:
+        switch (GameManager.Instance.state){
+            case GameManager.State.Playing:
 
-        UpdateSteering();
-        UpdatePhysics();
-        UpdateCamera();
+            UpdateSteering();
+            UpdatePhysics();
+            UpdateCamera();
+            UpdateHarpoon();
 
-        PlotTrajectory(transform.position + Vector3.up * 3, camera.transform.forward * 30000, 0.01f, 10.0f);
-        if(gamepad.GetButton(ActionKeyCode.GamepadA)){
-            HarpoonController testSpawn = Instantiate(HarpoonPrefab, transform.position + Vector3.up * 3, Quaternion.identity).GetComponent<HarpoonController>();
-            testSpawn.Fire(PlayerNum, camera.transform.forward * 30000);
+            break;
         }
-
-        break;
     }
-}
 
     public void Setup(int playerNum){ //Public call to setup our player
         this.PlayerNum = playerNum; //Set our player number
@@ -134,8 +132,7 @@ public class PlayerController : MonoBehaviour {
         radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 50;
     }
 
-    void UpdateCamera()
-    {
+    void UpdateCamera(){
         float newCameraX = gamepad.GetAxis(AxisCode.GamepadAxisRightX);
         float newCameraY = gamepad.GetAxis(AxisCode.GamepadAxisRightY);
 
@@ -148,5 +145,17 @@ public class PlayerController : MonoBehaviour {
 
         cameraX = newCameraX;
         cameraY = newCameraY;
+    }
+
+    void UpdateHarpoon(){
+        Vector3 start = transform.position + Vector3.up * 3;
+        Vector3 vel = camera.transform.forward.normalized * HarpoonInitialVelocityMagnitude;
+
+        PlotTrajectory(start, vel, 0.01f, 120.0f);
+
+        if(gamepad.GetButton(ActionKeyCode.GamepadA)){
+            HarpoonController testSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
+            testSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
+        }
     }
 }
