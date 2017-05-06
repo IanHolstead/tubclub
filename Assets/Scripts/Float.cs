@@ -20,32 +20,40 @@ public class Float : MonoBehaviour
     {
         age += Time.deltaTime;
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.up * -1, out hit, 10))
+        RaycastHit[] hits;
+        hits = Physics.RaycastAll(transform.position + .5f * Vector3.up, Vector3.up * -1, 1.5f);
+        if (hits.Length > 0)
         {
-
-            Vector3 pos = transform.position;
-            pos.y = hit.point.y + BobUpAndDown();
-            hitLoc = hit.point;
-            transform.position = pos;
-
-            //TODO: replace magic number
-            float step = 10 * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(meshRef.transform.up, hit.normal, step, 0.0F);
-            //Debug.DrawRay(transform.position, newDir, Color.black);
-            //Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
-            //Debug.DrawRay(transform.position, Vector3.left, Color.green);
-            //Debug.DrawRay(transform.position, Vector3.Cross(newDir, Vector3.left), Color.blue);
-            Vector3.Cross(newDir, Vector3.left);
-            meshRef.transform.rotation = Quaternion.LookRotation(Vector3.Cross(newDir, Vector3.left), newDir);
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider.gameObject == gameObject)
+                {
+                    continue;
+                }
+                Vector3 pos = transform.position;
+                pos.y = Mathf.Lerp(pos.y, hit.point.y + BobUpAndDown(), 1f);
+                
+                hitLoc = hit.point;
+                transform.position = pos;
+                
+                //TODO: replace magic number
+                float step = .5f * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(meshRef.transform.up, hit.normal, step, 0.0F);
+                Debug.DrawRay(transform.position, newDir, Color.black);
+                Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
+                Debug.DrawRay(transform.position, transform.position * -1, Color.green);
+                Debug.DrawRay(transform.position, Vector3.Cross(newDir, transform.position * -1), Color.blue);
+                Vector3.Cross(newDir, Vector3.left);
+                meshRef.transform.rotation = Quaternion.LookRotation(Vector3.Cross(newDir, transform.position * -1), newDir);
+            }
         }
     }
 
     ////visualize raycast
     //private void OnDrawGizmos()
     //{
-    //    DebugExtension.DrawArrow(transform.position + Vector3.up, Vector3.up * -1);
-    //    DebugExtension.DrawPoint(transform.position + Vector3.up * -10);
+    //    DebugExtension.DrawArrow(transform.position + .5f * Vector3.up, Vector3.up * -1f);
+    //    DebugExtension.DrawPoint(transform.position + Vector3.up * -1.5f);
     //    if (hitLoc != null)
     //    {
     //        DebugExtension.DrawPoint(hitLoc, Color.red);

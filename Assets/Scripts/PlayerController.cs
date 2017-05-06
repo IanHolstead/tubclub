@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour {
     public int HarpoonTrajectorySamples; //Number of points to sample when calculating trajectory
 
     [Header("Camera Variables")]
+    public float stearingAmount = 5;
+
+    [Header("Camera Variables")]
     public float verticalRange = 45f;
     public float horizontalRange = 90f;
 
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour {
     public float cameraY = 0;
 
     [Header("Component References")]
+    public GameObject meshRef;
     public Camera camera;
     public GameObject UICanvas;
 
@@ -46,7 +50,8 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        //TODO remove me
+        Setup(PlayerNum);
     }
 
     public Vector3 SampleTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float time) {
@@ -70,16 +75,16 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        switch (GameManager.Instance.state){
-            case GameManager.State.Playing:
+        //switch (GameManager.Instance.state){
+        //    case GameManager.State.Playing:
 
             UpdateSteering();
             UpdatePhysics();
             UpdateCamera();
             UpdateHarpoon();
 
-            break;
-        }
+        //    break;
+        //}
     }
 
     public void Setup(int playerNum){ //Public call to setup our player
@@ -122,20 +127,21 @@ public class PlayerController : MonoBehaviour {
             angle += 360; //Add 360 degrees
         }
         float deltaAngle = RotationSpeedOverRadius.Evaluate(radius); //Sample our curve to get our change in angle
-        angle += deltaAngle; //Add the delta
+        angle -= deltaAngle;
         angle = angle * Mathf.Deg2Rad; //Convert to radians
-        Vector3 newPos = new Vector3(Mathf.Sin(angle) * radius, 0, Mathf.Cos(angle) * radius); //Calculate their new position
+        Vector3 newPos = new Vector3(Mathf.Sin(angle) * radius, transform.position.y, Mathf.Cos(angle) * radius); //Calculate their new position
         transform.position = newPos; //Set the new position
-        transform.rotation = Quaternion.AngleAxis((angle * Mathf.Rad2Deg) + 90, Vector3.up);
+        transform.rotation = Quaternion.AngleAxis((angle * Mathf.Rad2Deg) - 90, Vector3.up);
     }
 
     void UpdateSteering(){
-        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 50;
+        //radius = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2));
+        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * stearingAmount;
     }
 
     void UpdateCamera(){
         float newCameraX = gamepad.GetAxis(AxisCode.GamepadAxisRightX);
-        float newCameraY = gamepad.GetAxis(AxisCode.GamepadAxisRightY);
+        float newCameraY = -gamepad.GetAxis(AxisCode.GamepadAxisRightY);
 
         //TODO: this should depend on delta time
         newCameraX = Mathf.Lerp(cameraX, GameFunctions.MapRange(newCameraX, 0, 1, 0, horizontalRange), .4f);
@@ -149,8 +155,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHarpoon(){
-        Vector3 start = transform.position + Vector3.up * 3; //The initial positon of the harpoon
-        Vector3 vel = camera.transform.forward.normalized * HarpoonInitialVelocityMagnitude; //The initial velocity vector of the harpoon
+        Vector3 start = transform.position + meshRef.transform.up * .3f; //The initial positon of the harpoon
+        Vector3 vel = (camera.transform.forward*2 + camera.transform.up).normalized * HarpoonInitialVelocityMagnitude; //The initial velocity vector of the harpoon
 
         //Calculate timestep, sample points on line to find trajectory, set linerenderer points
         float maxTime = 5.0f;
@@ -159,7 +165,7 @@ public class PlayerController : MonoBehaviour {
         lr.positionCount = points.Count;
         lr.SetPositions(points.ToArray());
 
-        if(gamepad.GetButton(ActionKeyCode.GamepadA)){
+        if(gamepad.GetButtonDown(ActionKeyCode.GamepadRightTrigger)){
             HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
             harpoonSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
         }

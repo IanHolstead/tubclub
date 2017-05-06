@@ -46,12 +46,6 @@ public class GameManager : Singleton<GameManager> {
 
     public void SpawnPlayers(int num){ //Spawn the players, given number of players to spawn
 
-        //TODO: remove me, should no longer be needed
-        //if(num < 2 || num > 4) { //If we're trying to spawn an invalid # of player
-        //    Debug.LogError("Invalid number of players: " + num);
-        //    return;
-        //}
-
         Players = new List<PlayerController>(); //Clear the list
 
         float degPerPlayer = 2 * Mathf.PI / num; //Calculate angle between each player spawn in radians
