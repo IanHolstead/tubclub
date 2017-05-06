@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager> {
         Players = new List<PlayerController>(); //Clear the list
 
         float degPerPlayer = 2 * Mathf.PI / num; //Calculate angle between each player spawn in radians
-        float spawnRadius = 10;
+        float spawnRadius = 100;
 
         for(int i = 1; i < num+1; i++){ //For each we want to
             Vector3 newPos = new Vector3(Mathf.Sin(degPerPlayer * i) * spawnRadius, 0, Mathf.Cos(degPerPlayer * i) * spawnRadius); //Calculate their spawn position
