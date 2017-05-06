@@ -25,8 +25,8 @@ public class HarpoonController : MonoBehaviour {
 		}
 	}
 
-	public void Fire(int playerNum, Vector3 direction){
+	public void Fire(int playerNum, Vector3 direction, float initialVelocityMagnitude){
 		firedBy = playerNum;
-		rb.AddForce(direction.normalized * 3000);
+		rb.AddForce(direction.normalized * initialVelocityMagnitude, ForceMode.VelocityChange);
 	}
 }
