@@ -480,8 +480,14 @@ MonoBehaviour:
     m_RotationOrder: 0
   radius: 0
   radiusVelocity: 0
+  HarpoonPrefab: {fileID: 0}
   PlayerNum: 1
+  verticalRange: 45
+  horizontalRange: 90
+  cameraX: 0
+  cameraY: 0
   camera: {fileID: 20003657883734180}
+  UICanvas: {fileID: 1975278313701736}
   state: 0
 --- !u!124 &124991044360966950
 Behaviour:

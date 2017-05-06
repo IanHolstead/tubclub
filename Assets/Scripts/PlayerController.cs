@@ -4,12 +4,17 @@ using UnityEngine;
 using XInputDotNetPure;
 using ControlWrapping;
 
+[AddComponentMenu("Controllers/PlayerController")]
+
 public class PlayerController : MonoBehaviour {
 
     [Header("Physics")]
     public AnimationCurve RotationSpeedOverRadius; //Left, 0 | Right, 1 Sample this curve for rotation speed in degrees per second
     public float radius; //Radius of our orbit, distance from 0, 0
     public float radiusVelocity; //Positive => increasing radius
+
+    [Header("Prefab References")]
+    public GameObject HarpoonPrefab;
 
     [Header("Player Variables")]
     public int PlayerNum; //[1-4]
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviour {
         camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 4"));
 
         //Turn on ONLY our layer mask
-        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum));
+        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum ));
      }
 
     void SetLayerRecursive(Transform obj, string layerName){
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 
     void UpdateSteering(){
         Debug.Log(gamepad.GetAxis(AxisCode.GamepadAxisLeftX));
-        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 30;
+        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 50;
     }
 
     void UpdateCamera()
