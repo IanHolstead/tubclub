@@ -4,12 +4,17 @@ using UnityEngine;
 using XInputDotNetPure;
 using ControlWrapping;
 
+[AddComponentMenu("Controllers/PlayerController")]
+
 public class PlayerController : MonoBehaviour {
 
     [Header("Physics")]
     public AnimationCurve RotationSpeedOverRadius; //Left, 0 | Right, 1 Sample this curve for rotation speed in degrees per second
     public float radius; //Radius of our orbit, distance from 0, 0
     public float radiusVelocity; //Positive => increasing radius
+
+    [Header("Prefab References")]
+    public GameObject HarpoonPrefab;
 
     [Header("Player Variables")]
     public int PlayerNum; //[1-4]
@@ -38,11 +43,16 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         // Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
-        switch(GameManager.Instance.state){
+        switch (GameManager.Instance.state){
             case GameManager.State.Playing:
                 UpdateSteering();
                 UpdatePhysics();
                 UpdateCamera();
+                
+                if(gamepad.GetButton(ActionKeyCode.GamepadA)){
+                    HarpoonController testSpawn = Instantiate(HarpoonPrefab, transform.position, Quaternion.identity).GetComponent<HarpoonController>();
+
+                }
             break;
         }
     }
@@ -60,7 +70,7 @@ public class PlayerController : MonoBehaviour {
         camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 4"));
 
         //Turn on ONLY our layer mask
-        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum));
+        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum ));
      }
 
     void SetLayerRecursive(Transform obj, string layerName){
@@ -100,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 
     void UpdateSteering(){
         Debug.Log(gamepad.GetAxis(AxisCode.GamepadAxisLeftX));
-        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 30;
+        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * 50;
     }
 
     void UpdateCamera()
@@ -112,13 +122,9 @@ public class PlayerController : MonoBehaviour {
         newCameraY = Mathf.Lerp(cameraY, GameFunctions.MapRange(newCameraY, 0, 1, 0, verticalRange), .4f);
 
         camera.transform.RotateAround(transform.position, Vector3.up, newCameraX - cameraX);
-        camera.transform.RotateAround(transform.position, Vector3.right, newCameraY - cameraY);
-        //camera.transform.rotation = Quaternion.Euler(camera.transform.rotation.x, camera.transform.rotation.y, 0);
+        camera.transform.RotateAround(transform.position, camera.transform.right, newCameraY - cameraY);
 
         cameraX = newCameraX;
         cameraY = newCameraY;
-        //transform.forward
-        // Debug.Log(gamepad.GetAxis(AxisCode.GamepadAxisRightX));
-        // Debug.Log(gamepad.GetAxis(AxisCode.GamepadAxisRightY));
     }
 }
