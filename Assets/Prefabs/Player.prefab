@@ -431,14 +431,14 @@ MonoBehaviour:
   HarpoonPrefab: {fileID: 1527333090903076, guid: 824d61d708707a04d9aca4016ec4ed17,
     type: 2}
   PlayerNum: 1
-  HarpoonForce: 300
+  HarpoonInitialVelocityMagnitude: 100
+  HarpoonTrajectorySamples: 50
   verticalRange: 45
   horizontalRange: 90
   cameraX: 0
   cameraY: 0
   camera: {fileID: 20003657883734180}
   UICanvas: {fileID: 1975278313701736}
-  time: 0
   state: 0
 --- !u!120 &120008994991386906
 LineRenderer:
@@ -453,7 +453,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 521aeb0ddeeeb4e44bc5bc3c4610ba6e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -477,7 +477,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 0.25
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -487,9 +487,15 @@ LineRenderer:
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -522,7 +528,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
   m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!124 &124991044360966950

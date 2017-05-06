@@ -14,6 +14,10 @@ public class HarpoonController : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	}
 
+	void Update(){
+		transform.rotation = Quaternion.LookRotation(rb.velocity);
+	}
+
 	void OnTriggerEnter(Collider other) {
 		if(other.tag == "Player"){
 			PlayerController hitPlayer = other.GetComponent<PlayerController>();

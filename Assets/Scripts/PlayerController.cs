@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Player Variables")]
     public int PlayerNum; //[1-4]
-    public float HarpoonInitialVelocityMagnitude;
+    public float HarpoonInitialVelocityMagnitude; //Initial velocity magnitude for when the harpoon is shot
+    public int HarpoonTrajectorySamples; //Number of points to sample when calculating trajectory
 
     [Header("Camera Variables")]
     public float verticalRange = 45f;
@@ -48,27 +49,27 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    public Vector3 PlotTrajectoryAtTime (Vector3 initialPosition, Vector3 initialVelocity, float time) {
+    public Vector3 SampleTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float time) {
         return initialPosition + (initialVelocity*time) + (Physics.gravity*time*time*0.5f);
     }
 
-    public void PlotTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float timestep, float maxTime) {
-
-        Vector3 prev = initialPosition;
-
-        for (int i=1;;i++) {
-            float t = timestep*i;
-            if (t > maxTime) break;
-            Vector3 pos = PlotTrajectoryAtTime (initialPosition, initialVelocity, t);
-            //if (Physics.Linecast (prev,pos)) break;
-            Debug.DrawLine (prev,pos,Color.red);
-            prev = pos;
+    public List<Vector3> SampleTrajectoryPoints (Vector3 initialPosition, Vector3 initialVelocity, float timeStep, float maxTime) {
+        List<Vector3> points = new List<Vector3>();
+        float t = 0;
+        while(t < maxTime){ //While we're not done sampling
+            Vector3 pos = SampleTrajectory (initialPosition, initialVelocity, t); //Get the position of the sample point
+            // if (Physics.Linecast (prev,pos)){
+            //     break;
+            // } 
+            points.Add(pos); //Add it to the list
+            t += timeStep; //Increment timestep
         }
+
+        return points;
     }
 
     // Update is called once per frame
     void Update () {
-        // Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
         switch (GameManager.Instance.state){
             case GameManager.State.Playing:
 
@@ -148,14 +149,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHarpoon(){
-        Vector3 start = transform.position + Vector3.up * 3;
-        Vector3 vel = camera.transform.forward.normalized * HarpoonInitialVelocityMagnitude;
+        Vector3 start = transform.position + Vector3.up * 3; //The initial positon of the harpoon
+        Vector3 vel = camera.transform.forward.normalized * HarpoonInitialVelocityMagnitude; //The initial velocity vector of the harpoon
 
-        PlotTrajectory(start, vel, 0.01f, 120.0f);
+        //Calculate timestep, sample points on line to find trajectory, set linerenderer points
+        float maxTime = 5.0f;
+        float timeStep = maxTime/HarpoonTrajectorySamples;
+        List<Vector3> points = SampleTrajectoryPoints(start, vel, timeStep, maxTime);
+        lr.positionCount = points.Count;
+        lr.SetPositions(points.ToArray());
 
         if(gamepad.GetButton(ActionKeyCode.GamepadA)){
-            HarpoonController testSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
-            testSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
+            HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
+            harpoonSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
         }
     }
 }
