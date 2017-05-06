@@ -13,6 +13,8 @@ ModelImporter:
     100010: Vortex
     100012: Drain
     100014: Tap
+    100016: Vortex 1
+    100018: Vortex 2
     400000: Legs
     400002: Tub
     400004: //RootNode
@@ -21,6 +23,8 @@ ModelImporter:
     400010: Vortex
     400012: Drain
     400014: Tap
+    400016: Vortex 1
+    400018: Vortex 2
     2300000: Legs
     2300002: Tub
     2300004: Water
@@ -28,6 +32,8 @@ ModelImporter:
     2300008: Vortex
     2300010: Drain
     2300012: Tap
+    2300014: Vortex 1
+    2300016: Vortex 2
     3300000: Legs
     3300002: Tub
     3300004: Water
@@ -35,6 +41,8 @@ ModelImporter:
     3300008: Vortex
     3300010: Drain
     3300012: Tap
+    3300014: Vortex 1
+    3300016: Vortex 2
     4300000: Legs
     4300002: Water
     4300004: Tub
@@ -42,6 +50,8 @@ ModelImporter:
     4300008: Vortex
     4300010: Drain
     4300012: Tap
+    4300014: Vortex 2
+    4300016: Vortex 1
   materials:
     importMaterials: 1
     materialName: 0
