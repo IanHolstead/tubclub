@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour {
 
     Gamepad gamepad;
 
+    public enum State { Null, Paused, Playing };
+    public State state;
+
     // Use this for initialization
     void Start () {
 
@@ -27,9 +30,13 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         // Debug.Log(gamepad.GetButton(ActionKeyCode.GamepadA));
-        UpdateSteering();
-        UpdatePhysics();
-        UpdateCamera();
+        switch(GameManager.Instance.state){
+            case GameManager.State.Playing:
+                UpdateSteering();
+                UpdatePhysics();
+                UpdateCamera();
+            break;
+        }
     }
 
     public void Setup(int playerNum){ //Public call to setup our player
