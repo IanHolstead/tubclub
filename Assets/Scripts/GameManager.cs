@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager> {
     [Header("Debug Variables")]
     public List<PlayerController> Players; //Player #1 is at index 0
 
-    public enum State { Null, Paused, Playing };
+    public enum State { Null, Paused, Playing, MainMenu, Spawning };
     public State state;
 
     void Awake(){
@@ -25,13 +25,22 @@ public class GameManager : Singleton<GameManager> {
 
     // Use this for initialization
     void Start () {
-        SpawnPlayers(numberOfPlayers);
+        //SpawnPlayers(numberOfPlayers);
     }
     
     // Update is called once per frame
     void Update () {
         foreach(PlayerController player in Players){
             Debug.Log(player.PlayerNum + ":" + player.state);
+        }
+    }
+
+    void OnLevelWasLoaded(){ //Called once level was loaded (duh)
+        switch(state){ //Depending on state
+            case State.Spawning: //If we're supposed to be spawning,
+                SpawnPlayers(numberOfPlayers); //Spawn the players,
+                state = State.Playing; //Change game state to playing
+            break;
         }
     }
 
@@ -87,5 +96,10 @@ public class GameManager : Singleton<GameManager> {
 
     public void SetState(State newState){
         state = newState;
+    }
+    public void StartGame(int players){
+        numberOfPlayers = players; //Set the number of players,
+        state = State.Spawning; //Set the game state to be spawning on level load,
+        LoadLevel("MainGame"); //Load the main game scene
     }
 }

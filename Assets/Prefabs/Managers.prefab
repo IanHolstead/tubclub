@@ -52,6 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8f6f1ccc5ddb043b279301254805da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfPlayers: 4
+  PlayerPrefab: {fileID: 1326989558350752, guid: a84001e4673a831408251663540c0e8b,
+    type: 2}
+  Players: []
   state: 0
 --- !u!114 &114843046207631540
 MonoBehaviour:
