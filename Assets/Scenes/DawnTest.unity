@@ -331,7 +331,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4647717389720458, guid: 1098e7380dbb0004e8e4dfd0cd311609, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.236
+      value: 1.219
       objectReference: {fileID: 0}
     - target: {fileID: 4647717389720458, guid: 1098e7380dbb0004e8e4dfd0cd311609, type: 2}
       propertyPath: m_LocalPosition.z
@@ -459,6 +459,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -19.531
       objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 68c7869b5cc499b47b3f589d30f5b1f0, type: 3}
+      propertyPath: m_Name
+      value: Vortex Light
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 68c7869b5cc499b47b3f589d30f5b1f0, type: 3}
   m_IsPrefabParent: 0
@@ -524,7 +528,7 @@ GameObject:
   - component: {fileID: 1684034911}
   - component: {fileID: 1684034910}
   m_Layer: 0
-  m_Name: Vortex (1)
+  m_Name: Vortex Dark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -557,7 +561,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 576a0b82977842f4b8e56766a58eeac6, type: 2}
+  - {fileID: 2100000, guid: 6715fbda826798a4191163b9dda03608, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
