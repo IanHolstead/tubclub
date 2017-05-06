@@ -467,12 +467,12 @@ MonoBehaviour:
       time: 0
       value: 10
       inSlope: -0.0775534
-      outSlope: -0.09
+      outSlope: -0.0975
       tangentMode: 65
     - serializedVersion: 2
       time: 100
-      value: 1
-      inSlope: -0.09
+      value: 0.25
+      inSlope: -0.0975
       outSlope: -0.00025408834
       tangentMode: 69
     m_PreInfinity: 2
@@ -480,7 +480,8 @@ MonoBehaviour:
     m_RotationOrder: 0
   radius: 0
   radiusVelocity: 0
-  HarpoonPrefab: {fileID: 0}
+  HarpoonPrefab: {fileID: 1527333090903076, guid: 824d61d708707a04d9aca4016ec4ed17,
+    type: 2}
   PlayerNum: 1
   verticalRange: 45
   horizontalRange: 90

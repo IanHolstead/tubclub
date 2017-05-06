@@ -30,7 +30,9 @@ public class GameManager : Singleton<GameManager> {
     
     // Update is called once per frame
     void Update () {
-        
+        foreach(PlayerController player in Players){
+            Debug.Log(player.PlayerNum + ":" + player.state);
+        }
     }
 
     public void SpawnPlayers(int num){ //Spawn the players, given number of players to spawn
