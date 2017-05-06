@@ -32,25 +32,25 @@ public class Float : MonoBehaviour
             //TODO: replace magic number
             float step = 10 * Time.deltaTime;
             Vector3 newDir = Vector3.RotateTowards(meshRef.transform.up, hit.normal, step, 0.0F);
-            Debug.DrawRay(transform.position, newDir, Color.black);
-            Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
-            Debug.DrawRay(transform.position, Vector3.left, Color.green);
-            Debug.DrawRay(transform.position, Vector3.Cross(newDir, Vector3.left), Color.blue);
+            //Debug.DrawRay(transform.position, newDir, Color.black);
+            //Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
+            //Debug.DrawRay(transform.position, Vector3.left, Color.green);
+            //Debug.DrawRay(transform.position, Vector3.Cross(newDir, Vector3.left), Color.blue);
             Vector3.Cross(newDir, Vector3.left);
             meshRef.transform.rotation = Quaternion.LookRotation(Vector3.Cross(newDir, Vector3.left), newDir);
         }
     }
 
-    //visualize raycast
-    private void OnDrawGizmos()
-    {
-        DebugExtension.DrawArrow(transform.position + Vector3.up, Vector3.up * -1);
-        DebugExtension.DrawPoint(transform.position + Vector3.up * -10);
-        if (hitLoc != null)
-        {
-            DebugExtension.DrawPoint(hitLoc, Color.red);
-        }
-    }
+    ////visualize raycast
+    //private void OnDrawGizmos()
+    //{
+    //    DebugExtension.DrawArrow(transform.position + Vector3.up, Vector3.up * -1);
+    //    DebugExtension.DrawPoint(transform.position + Vector3.up * -10);
+    //    if (hitLoc != null)
+    //    {
+    //        DebugExtension.DrawPoint(hitLoc, Color.red);
+    //    }
+    //}
 
     float BobUpAndDown()
     {
