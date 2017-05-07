@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4525237620857034}
   - component: {fileID: 33409588395670172}
   - component: {fileID: 23040068534254244}
+  - component: {fileID: 135684215289981150}
   m_Layer: 0
   m_Name: tennisball
   m_TagString: Untagged
@@ -35,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971151948647106}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.504, y: 1.106, z: -0.458}
-  m_LocalScale: {x: 2.7538135, y: 2.7538135, z: 2.7538135}
+  m_LocalPosition: {x: 0, y: 0.0165, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,3 +81,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971151948647106}
   m_Mesh: {fileID: 4300000, guid: 2f97c37903ef300469f0dfe8b951aaca, type: 3}
+--- !u!135 &135684215289981150
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971151948647106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.009999999
+  m_Center: {x: -4.656613e-10, y: 0.0000000023283062, z: 0}
