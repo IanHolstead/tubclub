@@ -49,16 +49,16 @@ public class Float : MonoBehaviour
         }
     }
 
-    //visualize raycast
-    private void OnDrawGizmos()
-    {
-        DebugExtension.DrawArrow(transform.position + .5f * Vector3.up, Vector3.up * -1f);
-        DebugExtension.DrawPoint(transform.position + Vector3.up * -4.5f);
-        if (hitLoc != null)
-        {
-            DebugExtension.DrawPoint(hitLoc, Color.red);
-        }
-    }
+    ////visualize raycast
+    //private void OnDrawGizmos()
+    //{
+    //    DebugExtension.DrawArrow(transform.position + .5f * Vector3.up, Vector3.up * -1f);
+    //    DebugExtension.DrawPoint(transform.position + Vector3.up * -4.5f);
+    //    if (hitLoc != null)
+    //    {
+    //        DebugExtension.DrawPoint(hitLoc, Color.red);
+    //    }
+    //}
 
     float BobUpAndDown()
     {

@@ -43,15 +43,20 @@ public class PlayerController : MonoBehaviour {
 
     Gamepad gamepad;
 
-    public enum State { Null, Paused, Alive, Dead };
+    public enum State { Null, Paused, Disabled, Alive, Dead };
     public State state;
+
+    public float disabledTime = 3f;
+    float timeSinceLastHit;
 
     void Awake(){
         lr = GetComponent<LineRenderer>();
     }
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        timeSinceLastHit = disabledTime;
     }
 
     public Vector3 SampleTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float time) {
@@ -74,19 +79,36 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
-        switch (GameManager.Instance.state)
+    void Update()
+    {
+        if (GameManager.Instance.state == GameManager.State.Countdown)
         {
-            case GameManager.State.Playing:
-
-                UpdateSteering();
             UpdatePhysics();
             UpdateCamera();
-            UpdateHarpoon();
+        }
+        else if (GameManager.Instance.state == GameManager.State.Playing )
+        {
+            switch (state)
+            {
+                case State.Disabled:
+                    timeSinceLastHit += Time.deltaTime;
+                    UpdatePhysics();
+                    UpdateCamera();
+                    break;
+                case State.Alive:
+                    UpdateSteering();
+                    UpdateCamera();
+                    UpdateHarpoon();
+                    UpdatePhysics();
+                    break;
 
-        break;
+                case State.Paused:
+
+                    break;
+
+            }
+        }
     }
-}
 
     void OnDestroy(){
         ControllerManager.instance.ReturnGamePad(PlayerNum-1);
@@ -110,7 +132,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void HitByHarpoon(){
-        this.state = State.Dead;
+        state = State.Dead;
+        //TODO: add effects
     }
 
     void SetLayerRecursive(Transform obj, string layerName){
@@ -169,14 +192,14 @@ public class PlayerController : MonoBehaviour {
         List<Vector3> points = SampleTrajectoryPoints(start, vel, timeStep, maxTime);
         lr.positionCount = points.Count;
         lr.SetPositions(points.ToArray());
+        UpdateCanonAngles(vel);
 
         if(gamepad.GetButtonDown(ActionKeyCode.GamepadRightTrigger)){
             HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
             harpoonSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
         }
     }
-
-    //TODO: call me (maybe)
+    
     void UpdateCanonAngles( Vector3 vel)
     {
         GameObject cannon;
@@ -189,7 +212,8 @@ public class PlayerController : MonoBehaviour {
             cannon = LeftCannon;
         }
 
-        cannon.transform.rotation = Quaternion.Euler(Vector3.Lerp(cannon.transform.rotation.eulerAngles.normalized, vel.normalized, .3f));
+        
+        cannon.transform.rotation = Quaternion.Euler(Vector3.Lerp(cannon.transform.rotation.eulerAngles.normalized, Quaternion.LookRotation(vel).eulerAngles, .3f));
         
     }
 }
