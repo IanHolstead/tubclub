@@ -315,7 +315,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: aba50d9ee35c8484dbe658e83269a41c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -479,7 +479,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5efbd6556cd58344d95d78ca108de165, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -588,7 +588,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a5a3cdff4d32f8c408fa1025ac71f3eb, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -699,7 +699,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundEffectPrefab: {fileID: 1259104464623762, guid: aa39bcfff178bad4cb525f4b49e993d3,
     type: 2}
-  FireClip: {fileID: 8300000, guid: f03e8eb708062d8428d30c0587381739, type: 3}
+  CannonFire1Clip: {fileID: 8300000, guid: 308061f583140594cb85b2adb7cf1651, type: 3}
+  CannonFire2Clip: {fileID: 8300000, guid: d271dc943d4d74744a761b0ea6e65b27, type: 3}
+  MenuSelectClip: {fileID: 8300000, guid: f633a5a3337522842b10ff3307f7215d, type: 3}
+  Quack1Clip: {fileID: 8300000, guid: 94bef7f669699db4ca3a4357efb1fe0e, type: 3}
+  Quack2Clip: {fileID: 8300000, guid: ef118349684467e45b6d1a443b1bae47, type: 3}
+  Quack3Clip: {fileID: 8300000, guid: 54a1dd20af1018c4cbb69afd425a63ef, type: 3}
 --- !u!1 &1693581879
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,7 +795,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 80afb1d64c444ce4695822fc5062594b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

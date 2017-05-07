@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour {
                     UpdateCamera(true);
                     UpdateHarpoon();
                     UpdatePhysics();
+                    UpdateQuack();
                     break;
 
                 case State.Paused:
@@ -157,6 +158,12 @@ public class PlayerController : MonoBehaviour {
 
     float nfmod(float a, float b){
         return a - b * Mathf.Floor(a / b);
+    }
+
+    void UpdateQuack(){
+        if(gamepad.GetButtonDown(ActionKeyCode.GamepadA)){
+            SoundEffectManager.Instance.PlaySoundEffect(SoundEffectManager.SoundEffectChoice.Quack);
+        }
     }
 
     void UpdatePhysics(){
@@ -217,6 +224,7 @@ public class PlayerController : MonoBehaviour {
         if(gamepad.GetButtonDown(ActionKeyCode.GamepadRightTrigger)){
             HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
             harpoonSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
+            SoundEffectManager.Instance.PlaySoundEffect(SoundEffectManager.SoundEffectChoice.CannonFire);
         }
     }
 
