@@ -841,12 +841,13 @@ MonoBehaviour:
   horizontalRange: 50
   cameraX: 0
   cameraY: 0
-  LeftCannon: {fileID: 0}
-  RightCannon: {fileID: 0}
+  LeftCannon: {fileID: 1978017450029774}
+  RightCannon: {fileID: 1801622599872856}
   meshRef: {fileID: 1882402823558478}
   camera: {fileID: 20003657883734180}
   UICanvas: {fileID: 1975278313701736}
   state: 0
+  disabledTime: 3
 --- !u!120 &120008994991386906
 LineRenderer:
   m_ObjectHideFlags: 1
