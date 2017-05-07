@@ -856,7 +856,7 @@ GameObject:
   - component: {fileID: 1730296892}
   - component: {fileID: 1730296891}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Game Over Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -882,10 +882,10 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0.9242978
-      outSlope: 0.9242978
-      tangentMode: 0
+      outSlope: 0.33333334
+      tangentMode: 65
     - serializedVersion: 2
-      time: 1
+      time: 3
       value: 1
       inSlope: 0
       outSlope: 0

@@ -34,9 +34,14 @@ public class GameOverController : MonoBehaviour {
                 SharedUIManager.Instance.ShowGameOverMenu();
             }
         }
+        else
+        {
+            MusicManager.Instance.SetMainGameMusicPitch(1);
+        }
     }
 
 	public void GoToMainMenu(){
+        MusicManager.Instance.ResetAllMusic();
 		GameManager.Instance.LoadLevel("MainMenu");
 	}
 
