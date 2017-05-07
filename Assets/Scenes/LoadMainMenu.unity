@@ -384,6 +384,53 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!1001 &454332778
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -6.5091624
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.29436707
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971668148863172, guid: a84001e4673a831408251663540c0e8b, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 223924266900115868, guid: a84001e4673a831408251663540c0e8b,
+        type: 2}
+      propertyPath: m_PlaneDistance
+      value: 0.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a84001e4673a831408251663540c0e8b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &785992188
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +752,7 @@ MonoBehaviour:
   Quack1Clip: {fileID: 8300000, guid: 94bef7f669699db4ca3a4357efb1fe0e, type: 3}
   Quack2Clip: {fileID: 8300000, guid: ef118349684467e45b6d1a443b1bae47, type: 3}
   Quack3Clip: {fileID: 8300000, guid: 54a1dd20af1018c4cbb69afd425a63ef, type: 3}
+  DeflateClip: {fileID: 8300000, guid: 651f5df68eb528d4b9c15704eeec1e09, type: 3}
 --- !u!1 &1693581879
 GameObject:
   m_ObjectHideFlags: 0

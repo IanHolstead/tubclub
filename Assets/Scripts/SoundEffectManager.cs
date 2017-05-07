@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundEffectManager : Singleton<SoundEffectManager> {
 
-	public enum SoundEffectChoice { Null, Fire, CannonFire, MenuSelect, Quack };
+	public enum SoundEffectChoice { Null, Fire, CannonFire, MenuSelect, Quack, Deflate };
 	public GameObject SoundEffectPrefab;
 
 	public AudioClip CannonFire1Clip;
@@ -13,6 +13,7 @@ public class SoundEffectManager : Singleton<SoundEffectManager> {
 	public AudioClip Quack1Clip;
 	public AudioClip Quack2Clip;
 	public AudioClip Quack3Clip;
+	public AudioClip DeflateClip;
 
 	// Use this for initialization
 	void Start () {
@@ -49,6 +50,10 @@ public class SoundEffectManager : Singleton<SoundEffectManager> {
 				} else if(selection == 2){
 					soundEffect.Play(Quack3Clip);
 				}
+			break;
+
+			case SoundEffectChoice.Deflate:
+				soundEffect.Play(DeflateClip);
 			break;
 
 			default:

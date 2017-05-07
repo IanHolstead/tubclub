@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject meshRef;
     public Camera camera;
     public GameObject UICanvas;
+    public Fader BlackFader;
 
     LineRenderer lr;
 
@@ -153,8 +154,10 @@ public class PlayerController : MonoBehaviour {
         gamepad.SetVibration(1, 1, 1);
         state = State.Dead;
         //gameObject.AddComponent<Floaties>();
-        Destroy(this, .5f);
+        Destroy(this, 1.0f);
+        SoundEffectManager.Instance.PlaySoundEffect(SoundEffectManager.SoundEffectChoice.Deflate);
         //TODO: fade to black
+        BlackFader.Fade(1.0f);
     }
 
     public void HitByHarpoon(){
