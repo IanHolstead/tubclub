@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class SharedUIManager : Singleton<SharedUIManager> {
 
@@ -8,8 +9,13 @@ public class SharedUIManager : Singleton<SharedUIManager> {
 	public TimerController timerController;
 	public GameOverController gameOverMenu;
 	public RectTransform CircleTransitioner;
+	public TextMeshProUGUI EndGameText;
 
 	void Update(){
+	}
+
+	public void SetEndGameText(string text){
+		EndGameText.text = text;
 	}
 
 	public void ShowTimer(){

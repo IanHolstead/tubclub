@@ -699,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SoundEffectPrefab: {fileID: 1259104464623762, guid: aa39bcfff178bad4cb525f4b49e993d3,
     type: 2}
-  FireClip: {fileID: 8300000, guid: 5efbd6556cd58344d95d78ca108de165, type: 3}
+  FireClip: {fileID: 8300000, guid: f03e8eb708062d8428d30c0587381739, type: 3}
 --- !u!1 &1693581879
 GameObject:
   m_ObjectHideFlags: 0

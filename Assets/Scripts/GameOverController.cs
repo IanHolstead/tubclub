@@ -59,9 +59,12 @@ public class GameOverController : MonoBehaviour {
 
         FloatySpawner.Instance.IsSpawning = false;
 
+        SharedUIManager.Instance.SetEndGameText("Player " + winner + " wins!");
+
         if (winner == -1)
         { //Time ran out
-
+            SharedUIManager.Instance.SetEndGameText("You all lose!");
         }
+
     }
 }
