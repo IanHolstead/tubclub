@@ -83,7 +83,7 @@ public class GameManager : Singleton<GameManager> {
         PlayerController winner = null;
         int aliveCounter = 0;
         foreach(PlayerController player in Players){ //Foreach player,
-            if(player.state == PlayerController.State.Alive){ //If that player is alive
+            if(player.state == PlayerController.State.Alive || player.state == PlayerController.State.Disabled){ //If that player is alive
                 winner = player; //They are the current winner
                 aliveCounter ++;
             }

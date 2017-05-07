@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33647750318243812}
   - component: {fileID: 23989407294411798}
   - component: {fileID: 135172973400929352}
+  - component: {fileID: 54584057212925892}
+  - component: {fileID: 114292379367916052}
   m_Layer: 0
   m_Name: donut
   m_TagString: Untagged
@@ -61,7 +63,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 703cb0c05f11b884caaf1b680291243b, type: 2}
   - {fileID: 2100000, guid: a7187997c246ad64c87652b522bbbf12, type: 2}
   - {fileID: 2100000, guid: 6024c9fa8d554a349a39487f5ba27fe0, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8bd36159af39d8b4d9d278ed1e195803, type: 2}
   - {fileID: 2100000, guid: 1c5063cc81d206b46b57575873e70db1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -88,6 +90,32 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055032635257098}
   m_Mesh: {fileID: 4300000, guid: b30eeb2222fa76f40a0de68ed5a47368, type: 3}
+--- !u!54 &54584057212925892
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055032635257098}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &114292379367916052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055032635257098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85128d743f9d2f4c9a05986e4c274d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135172973400929352
 SphereCollider:
   m_ObjectHideFlags: 1

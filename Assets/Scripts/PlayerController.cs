@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour {
 
     public float disabledTime = 3f;
     float timeSinceLastHit;
+    float scaleTimer;
 
     void Awake() {
         lr = GetComponent<LineRenderer>();
@@ -109,19 +110,23 @@ public class PlayerController : MonoBehaviour {
                     }
                     break;
                 case State.Alive:
+                    gamepad.EndVibration();
                     UpdateSteering();
                     UpdateCamera(true);
                     UpdateHarpoon();
                     UpdatePhysics();
                     UpdateQuack();
-                    break;
+                break;
 
                 case State.Paused:
 
                     break;
                 case State.Dead:
+                    scaleTimer += Time.deltaTime;
+                    if(meshRef != null)
+                    meshRef.transform.localScale *= (2.0f - scaleTimer)/2.0f;
                     UpdateCamera(false);
-                    break;
+                break;
             }
         }
     }
@@ -151,13 +156,16 @@ public class PlayerController : MonoBehaviour {
     }
     void Die()
     {
-        gamepad.SetVibration(1, 1, 1);
+        lr.positionCount = 0;
+        gamepad.SetVibration(0.75f, 0.75f, 0.75f);
         state = State.Dead;
         //gameObject.AddComponent<Floaties>();
         Destroy(this, 1.0f);
         SoundEffectManager.Instance.PlaySoundEffect(SoundEffectManager.SoundEffectChoice.Deflate);
         //TODO: fade to black
         BlackFader.Fade(1.0f);
+        Destroy(meshRef, 2.0f);
+        scaleTimer = 0;
     }
 
     public void HitByHarpoon(){
@@ -230,7 +238,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHarpoon(){
-        Vector3 start = (LeftCannon.transform.position + RightCannon.transform.position)/2;// + meshRef.transform.up * .3f; //The initial positon of the harpoon
+        Vector3 start = (LeftCannon.transform.position + RightCannon.transform.position)/2 + Vector3.up * 0.3f;// + meshRef.transform.up * .3f; //The initial positon of the harpoon
         Vector3 vel = (camera.transform.forward*2 + camera.transform.up).normalized * HarpoonInitialVelocityMagnitude; //The initial velocity vector of the harpoon
 
         //Calculate timestep, sample points on line to find trajectory, set linerenderer points

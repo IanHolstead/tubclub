@@ -18,6 +18,9 @@ public class Float : MonoBehaviour
 
     void Update()
     {
+        if(meshRef == null){
+            return;
+        }
         age += Time.deltaTime;
 
         RaycastHit[] hits;

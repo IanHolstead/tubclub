@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33029314855457458}
   - component: {fileID: 23573152313365282}
   - component: {fileID: 65354781968072990}
+  - component: {fileID: 54729867386101102}
+  - component: {fileID: 114753260472691334}
   m_Layer: 0
   m_Name: joycon right
   m_TagString: Untagged
@@ -82,6 +84,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1703882997090854}
   m_Mesh: {fileID: 4300000, guid: 3394406c6a3816740aa771315918a8c9, type: 3}
+--- !u!54 &54729867386101102
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703882997090854}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65354781968072990
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -94,3 +111,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.002828166, y: 0.0015704378, z: 0.007220068}
   m_Center: {x: 0.0000048036122, y: -0.0004406036, z: 0.0036324689}
+--- !u!114 &114753260472691334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703882997090854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d85128d743f9d2f4c9a05986e4c274d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

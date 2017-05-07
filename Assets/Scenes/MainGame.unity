@@ -1277,7 +1277,7 @@ MonoBehaviour:
   FloatySkeletonPrefab: {fileID: 1596622364143334, guid: e4afd26e124bba841b093bf82ab11714,
     type: 2}
   IsSpawning: 1
-  SpawnRate: 5
+  SpawnRate: 3
   MinSpawnRadius: 12
   MaxSpawnRadius: 13
 --- !u!4 &1781052623
