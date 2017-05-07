@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
     public float cameraY = 0;
 
     [Header("Component References")]
+    public GameObject LeftCannon;
+    public GameObject RightCannon;
     public GameObject meshRef;
     public Camera camera;
     public GameObject UICanvas;
@@ -50,8 +52,6 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //TODO remove me
-        Setup(PlayerNum);
     }
 
     public Vector3 SampleTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float time) {
@@ -75,17 +75,18 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        //switch (GameManager.Instance.state){
-        //    case GameManager.State.Playing:
+        switch (GameManager.Instance.state)
+        {
+            case GameManager.State.Playing:
 
-            UpdateSteering();
+                UpdateSteering();
             UpdatePhysics();
             UpdateCamera();
             UpdateHarpoon();
 
-        //    break;
-        //}
+        break;
     }
+}
 
     void OnDestroy(){
         ControllerManager.instance.ReturnGamePad(PlayerNum-1);
@@ -173,5 +174,22 @@ public class PlayerController : MonoBehaviour {
             HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
             harpoonSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
         }
+    }
+
+    //TODO: call me
+    void UpdateCanonAngles( Vector3 vel)
+    {
+        GameObject cannon;
+        if (cameraX >= 0) 
+        {
+            cannon = RightCannon;
+        }
+        else
+        {
+            cannon = LeftCannon;
+        }
+
+        cannon.transform.rotation = Quaternion.Euler(Vector3.Lerp(cannon.transform.rotation.eulerAngles.normalized, vel.normalized, .3f));
+        
     }
 }
