@@ -21,7 +21,7 @@ public class Float : MonoBehaviour
         age += Time.deltaTime;
 
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(transform.position + .5f * Vector3.up, Vector3.up * -1, 1.5f);
+        hits = Physics.RaycastAll(transform.position + .5f * Vector3.up, Vector3.up * -1, 4.5f);
         if (hits.Length > 0)
         {
             foreach (RaycastHit hit in hits)
@@ -39,26 +39,26 @@ public class Float : MonoBehaviour
                 //TODO: replace magic number
                 float step = .5f * Time.deltaTime;
                 Vector3 newDir = Vector3.RotateTowards(meshRef.transform.up, hit.normal, step, 0.0F);
-                Debug.DrawRay(transform.position, newDir, Color.black);
-                Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
-                Debug.DrawRay(transform.position, transform.position * -1, Color.green);
-                Debug.DrawRay(transform.position, Vector3.Cross(newDir, transform.position * -1), Color.blue);
+                //Debug.DrawRay(transform.position, newDir, Color.black);
+                //Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
+                //Debug.DrawRay(transform.position, transform.position * -1, Color.green);
+                //Debug.DrawRay(transform.position, Vector3.Cross(newDir, transform.position * -1), Color.blue);
                 Vector3.Cross(newDir, Vector3.left);
                 meshRef.transform.rotation = Quaternion.LookRotation(Vector3.Cross(newDir, transform.position * -1), newDir);
             }
         }
     }
 
-    ////visualize raycast
-    //private void OnDrawGizmos()
-    //{
-    //    DebugExtension.DrawArrow(transform.position + .5f * Vector3.up, Vector3.up * -1f);
-    //    DebugExtension.DrawPoint(transform.position + Vector3.up * -1.5f);
-    //    if (hitLoc != null)
-    //    {
-    //        DebugExtension.DrawPoint(hitLoc, Color.red);
-    //    }
-    //}
+    //visualize raycast
+    private void OnDrawGizmos()
+    {
+        DebugExtension.DrawArrow(transform.position + .5f * Vector3.up, Vector3.up * -1f);
+        DebugExtension.DrawPoint(transform.position + Vector3.up * -4.5f);
+        if (hitLoc != null)
+        {
+            DebugExtension.DrawPoint(hitLoc, Color.red);
+        }
+    }
 
     float BobUpAndDown()
     {
