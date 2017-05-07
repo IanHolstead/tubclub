@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4037034527917894}
   - component: {fileID: 33235831717393140}
   - component: {fileID: 23895205660195588}
+  - component: {fileID: 135569091895565698}
   m_Layer: 0
   m_Name: shroom
   m_TagString: Untagged
@@ -35,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1578292924879726}
   m_LocalRotation: {x: -0.72868615, y: -0.2558383, z: -0.22523867, w: 0.59399563}
-  m_LocalPosition: {x: 0.662, y: 1.173, z: -0.489}
-  m_LocalScale: {x: 1.5280336, y: 1.5280344, z: 1.5280344}
+  m_LocalPosition: {x: -6.016349, y: -4.302802, z: 0.01899479}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,3 +84,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1578292924879726}
   m_Mesh: {fileID: 4300000, guid: bd15aad3aa9baf24abb783dc1f648974, type: 3}
+--- !u!135 &135569091895565698
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1578292924879726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.026016785
+  m_Center: {x: 0.0000000028564815, y: 0.0032195768, z: 0.011382329}

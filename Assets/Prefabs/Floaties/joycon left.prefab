@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4044561678984786}
   - component: {fileID: 33189523653488960}
   - component: {fileID: 23416646262245244}
+  - component: {fileID: 65375476558332758}
   m_Layer: 0
   m_Name: joycon left
   m_TagString: Untagged
@@ -34,13 +35,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1857049178957336}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.416, y: 1.234, z: -0.522}
-  m_LocalScale: {x: 8.361711, y: 8.3617115, z: 8.3617115}
+  m_LocalRotation: {x: 0.9708163, y: 0.12669995, z: 0.16610771, w: -0.11777551}
+  m_LocalPosition: {x: -1.0770552, y: -4.62, z: -3.3}
+  m_LocalScale: {x: 150, y: 150.00014, z: 150.00021}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 195.71, y: -17.7, z: -12.41}
 --- !u!23 &23416646262245244
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -81,3 +82,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1857049178957336}
   m_Mesh: {fileID: 4300000, guid: 500711d7d2f179244b71c71950bf993b, type: 3}
+--- !u!65 &65375476558332758
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1857049178957336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002828165, y: 0.0015704371, z: 0.0072200675}
+  m_Center: {x: 0.00035782758, y: -0.00044060335, z: 0.0036324689}

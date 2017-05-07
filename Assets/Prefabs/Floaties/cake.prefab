@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4945313537119306}
   - component: {fileID: 33746695059885978}
   - component: {fileID: 23877311289598582}
+  - component: {fileID: 135005764213469778}
   m_Layer: 0
   m_Name: cake
   m_TagString: Untagged
@@ -35,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1108317712392286}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.473, y: 1.177, z: -0.53}
-  m_LocalScale: {x: 3.4130182, y: 3.413019, z: 3.413019}
+  m_LocalPosition: {x: 1.22822, y: -6.9032116, z: 3.0645244}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,3 +85,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1108317712392286}
   m_Mesh: {fileID: 4300000, guid: 994c1744a4e7fc84b8e8becbfccd0eba, type: 3}
+--- !u!135 &135005764213469778
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1108317712392286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.015358662
+  m_Center: {x: 4.656613e-10, y: -0.0000000018626448, z: 0.006827055}

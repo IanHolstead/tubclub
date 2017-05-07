@@ -10,6 +10,8 @@ public class Floaties : MonoBehaviour {
     public float radiusVelocity; //Positive => increasing radius
                                  // Use this for initialization
 
+    bool slatedForDestrcution = false;
+
     public AnimationCurve RadiusReductionOverRadius;
     void Start () {
 		
@@ -17,8 +19,9 @@ public class Floaties : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        UpdatePhysics();
         ReduceRadius();
+        UpdatePhysics();
+        TestRadius();
 	}
 
     void UpdatePhysics()
@@ -41,5 +44,21 @@ public class Floaties : MonoBehaviour {
     void ReduceRadius()
     {
         radiusVelocity = RadiusReductionOverRadius.Evaluate(radius);
+    }
+
+    void TestRadius()
+    {
+        if (slatedForDestrcution)
+        {
+            Vector3 pos = transform.position;
+            pos.y -= Time.deltaTime;
+            transform.position = pos;
+        }
+        else if (radius < .9f)
+        {
+            GetComponent<Float>().enabled = false;
+            Destroy(gameObject, 1.5f);
+            slatedForDestrcution = true;
+        }
     }
 }
