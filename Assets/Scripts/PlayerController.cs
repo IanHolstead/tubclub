@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHarpoon(){
-        Vector3 start = transform.position + meshRef.transform.up * .3f; //The initial positon of the harpoon
+        Vector3 start = transform.position;// + meshRef.transform.up * .3f; //The initial positon of the harpoon
         Vector3 vel = (camera.transform.forward*2 + camera.transform.up).normalized * HarpoonInitialVelocityMagnitude; //The initial velocity vector of the harpoon
 
         //Calculate timestep, sample points on line to find trajectory, set linerenderer points
@@ -212,6 +212,7 @@ public class PlayerController : MonoBehaviour {
             cannon = LeftCannon;
         }
 
+        Debug.DrawRay(cannon.transform.position + Vector3.up * .3f, Quaternion.LookRotation(vel).eulerAngles);
         
         cannon.transform.rotation = Quaternion.Euler(Vector3.Lerp(cannon.transform.rotation.eulerAngles.normalized, Quaternion.LookRotation(vel).eulerAngles, .3f));
         
