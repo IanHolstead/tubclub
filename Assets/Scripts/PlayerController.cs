@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour {
     public float stearingAmount = 5;
 
     [Header("Camera Variables")]
-    public float verticalRange = 45f;
-    public float horizontalRange = 90f;
+    public float verticalRange = 25f;
+    public float horizontalRange = 50f;
 
     public float cameraX = 0;
     public float cameraY = 0;
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    //TODO: call me
+    //TODO: call me (maybe)
     void UpdateCanonAngles( Vector3 vel)
     {
         GameObject cannon;

@@ -837,8 +837,8 @@ MonoBehaviour:
   HarpoonInitialVelocityMagnitude: 100
   HarpoonTrajectorySamples: 50
   stearingAmount: 5
-  verticalRange: 45
-  horizontalRange: 90
+  verticalRange: 25
+  horizontalRange: 50
   cameraX: 0
   cameraY: 0
   LeftCannon: {fileID: 0}

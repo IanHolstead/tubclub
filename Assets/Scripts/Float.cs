@@ -38,13 +38,13 @@ public class Float : MonoBehaviour
                 
                 //TODO: replace magic number
                 float step = .5f * Time.deltaTime;
-                Vector3 newDir = Vector3.RotateTowards(meshRef.transform.up, hit.normal, step, 0.0F);
-                //Debug.DrawRay(transform.position, newDir, Color.black);
-                //Debug.DrawRay(transform.position, meshRef.transform.forward, Color.red);
-                //Debug.DrawRay(transform.position, transform.position * -1, Color.green);
-                //Debug.DrawRay(transform.position, Vector3.Cross(newDir, transform.position * -1), Color.blue);
-                Vector3.Cross(newDir, Vector3.left);
-                meshRef.transform.rotation = Quaternion.LookRotation(Vector3.Cross(newDir, transform.position * -1), newDir);
+                Vector3 newUp = Vector3.RotateTowards(meshRef.transform.up, hit.normal, step, 0.0F);
+                Vector3 planeVector = meshRef.transform.position * -1;
+                planeVector.y = 0;
+
+                Vector3 newForward = Vector3.Lerp(meshRef.transform.forward, Vector3.Cross(newUp, planeVector), .3f);
+                meshRef.transform.rotation = Quaternion.LookRotation(newForward, newUp);
+                meshRef.transform.Rotate(0, -10, 0);
             }
         }
     }
