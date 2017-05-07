@@ -13,25 +13,44 @@ public class MusicManager : Singleton<MusicManager> {
 	public int NextLoopSection;
 	public double initialAudioSettingsTime;
 
+	double initialMainGameMusicQueueTime;
+	double mainGameMusicStartTime;
+	double mainGameMusicBeatDropTime;
+	const double mainGameMusicBeatDropTimeOffest = 6.50;
+
 	double audioTimer = 0;
 
 	// Use this for initialization
 	void Start () {
-		CurrentLoopSection = -1;
-		MainGameMusicIsQueued = false;
-		MainGameMusicIsPlaying = false;
+		ResetAllMusic();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		QueueNextSection();
-		if(Input.GetButton("Jump")){
-			MainGameMusicIsQueued = true;
-		}
+		Debug.Log(GetFractionUntilMainGameMusicStart());
+		Debug.Log(GetFractionUntilMainGameBeatDrop());
 	}
 
 	public void PlayMainGameMusic(){
 		MainGameMusicIsQueued = true;
+		initialMainGameMusicQueueTime = AudioSettings.dspTime;
+		mainGameMusicStartTime = initialMainGameMusicQueueTime + (IntroLoopSections[CurrentLoopSection].clip.length - IntroLoopSections[CurrentLoopSection].time);
+		mainGameMusicBeatDropTime = mainGameMusicStartTime + mainGameMusicBeatDropTimeOffest;
+	}
+
+	public float GetFractionUntilMainGameMusicStart(){
+		return (float)((mainGameMusicStartTime - AudioSettings.dspTime)/(mainGameMusicStartTime - initialMainGameMusicQueueTime));
+	}
+
+	public float GetFractionUntilMainGameBeatDrop(){
+		return (float)((mainGameMusicBeatDropTime - AudioSettings.dspTime)/(mainGameMusicBeatDropTime - mainGameMusicStartTime));
+	}
+
+	public void ResetAllMusic(){
+		CurrentLoopSection = -1;
+		MainGameMusicIsQueued = false;
+		MainGameMusicIsPlaying = false;
 	}
 
 	public void QueueNextSection(){

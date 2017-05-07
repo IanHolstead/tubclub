@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager> {
     [Header("Debug Variables")]
     public List<PlayerController> Players; //Player #1 is at index 0
 
-    public enum State { Null, Paused, Playing, MainMenu, Spawning, StartingRound, EndGame };
+    public enum State { Null, Paused, Playing, MainMenu, Spawning, StartingRound, EndGame, Countdown, WaitingForMusicSync };
     public State state;
 
     float roundTimer;
@@ -41,6 +41,17 @@ public class GameManager : Singleton<GameManager> {
             break;
             case State.EndGame:
                 //TODO
+            break;
+            case State.Countdown:
+                if(MusicManager.Instance.GetFractionUntilMainGameBeatDrop() <= 0){
+                    StartRound();
+                }
+            break;
+            case State.WaitingForMusicSync:
+                if(MusicManager.Instance.GetFractionUntilMainGameMusicStart() <= 0){
+                    state = State.Spawning;
+                    LoadLevel("MainGame"); //Load the main game scene
+                }
             break;
         }
         
@@ -116,8 +127,7 @@ public class GameManager : Singleton<GameManager> {
             break;
         }
 
-        state = State.StartingRound;
-        StartRound(); //Then start the round
+        state = State.Countdown;
     }
 
     public void StartRound(){
@@ -139,7 +149,6 @@ public class GameManager : Singleton<GameManager> {
     }
     public void StartGame(int players){
         numberOfPlayers = players; //Set the number of players,
-        state = State.Spawning; //Set the game state to be spawning on level load,
-        LoadLevel("MainGame"); //Load the main game scene
+        state = State.WaitingForMusicSync; //Set the game state to be spawning on level load,
     }
 }
