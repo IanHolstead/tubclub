@@ -34,9 +34,14 @@ public class GameOverController : MonoBehaviour {
                 SharedUIManager.Instance.ShowGameOverMenu();
             }
         }
+        else
+        {
+            MusicManager.Instance.SetMainGameMusicPitch(1);
+        }
     }
 
 	public void GoToMainMenu(){
+        MusicManager.Instance.ResetAllMusic();
 		GameManager.Instance.LoadLevel("MainMenu");
 	}
 
@@ -51,6 +56,8 @@ public class GameOverController : MonoBehaviour {
         gameOverCamera.gameObject.SetActive(true);
         gameOverCamera.depth = 1; //Set it to render at the front
         GameManager.Instance.state = GameManager.State.EndGame;
+
+        FloatySpawner.Instance.IsSpawning = false;
 
         if (winner == -1)
         { //Time ran out

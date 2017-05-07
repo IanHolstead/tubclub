@@ -51,6 +51,11 @@ public class MusicManager : Singleton<MusicManager> {
 
 	public void ResetAllMusic(){
 		CurrentLoopSection = -1;
+		MainGameMusic.pitch = 1;
+		MainGameMusic.Stop();
+		foreach(AudioSource audioSource in IntroLoopSections){
+			audioSource.Stop();
+		}
 		MainGameMusicIsQueued = false;
 		MainGameMusicIsPlaying = false;
 	}

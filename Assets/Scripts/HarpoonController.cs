@@ -24,8 +24,13 @@ public class HarpoonController : MonoBehaviour {
 			if(hitPlayer != null){
 				if(hitPlayer.PlayerNum != firedBy){
 					hitPlayer.HitByHarpoon();
+					Destroy(gameObject);
+				} else {
+					return;
 				}
 			}
+		} else {
+			Destroy(gameObject);
 		}
 	}
 
