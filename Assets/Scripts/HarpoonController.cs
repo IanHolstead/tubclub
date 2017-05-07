@@ -10,12 +10,19 @@ public class HarpoonController : MonoBehaviour {
 	public int firedBy;
 	Rigidbody rb;
 
+    float age;
+
 	void Awake(){
 		rb = GetComponent<Rigidbody>();
 	}
 
 	void Update(){
 		transform.rotation = Quaternion.LookRotation(rb.velocity);
+        age += Time.deltaTime;
+        if (age > 2f)
+        {
+            Destroy(gameObject);
+        }
 	}
 
 	void OnTriggerEnter(Collider other) {
