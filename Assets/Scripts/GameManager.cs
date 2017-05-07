@@ -22,9 +22,7 @@ public class GameManager : Singleton<GameManager> {
     public State state;
 
     float roundTimer;
-    Camera gameOverCamera;
-    float endGameTimer;
-    public Vector3 EndGameCameraPosition;
+    GameOverController gameOverController;
 
     void Awake(){
         DontDestroyOnLoad(transform.gameObject); //Don't destroy us on loading new scenes
@@ -42,11 +40,7 @@ public class GameManager : Singleton<GameManager> {
                 UpdateRound();
             break;
             case State.EndGame:
-                gameOverCamera.transform.position = Vector3.Lerp(new Vector3(0, -9, 0), EndGameCameraPosition, EndGameCameraLerp.Evaluate(endGameTimer));
-                endGameTimer += Time.deltaTime;
-                if(EndGameCameraLerp.Evaluate(endGameTimer) >= 1){
-                    SharedUIManager.Instance.ShowGameOverMenu();
-                }
+                //TODO
             break;
         }
         
@@ -55,7 +49,7 @@ public class GameManager : Singleton<GameManager> {
     void OnLevelWasLoaded(){ //Called once level was loaded (duh)
         switch(state){ //Depending on state
             case State.Spawning: //If we're supposed to be spawning,
-                gameOverCamera = GameObject.Find("GameOver Camera").GetComponent<Camera>(); //Get the camera reference
+                gameOverController = FindObjectOfType<GameOverController>();
                 SpawnPlayers(numberOfPlayers); //Spawn the players
             break;
         }
@@ -67,7 +61,7 @@ public class GameManager : Singleton<GameManager> {
         SharedUIManager.Instance.UpdateTimer(roundTimer, RoundTime);
 
         if(roundTimer > RoundTime){
-            EndGame(-1);
+            gameOverController.EndGame(-1);
             return;
         }
 
@@ -82,18 +76,12 @@ public class GameManager : Singleton<GameManager> {
 
         if(aliveCounter == 1){ //If only one player is alive, then we know winner is set to them
             //TODO: End game, show winner
-            EndGame(winner.PlayerNum);
+            gameOverController.EndGame(winner.PlayerNum);
             return;
         }
     }
 
     public void SpawnPlayers(int num){ //Spawn the players, given number of players to spawn
-
-        //TODO: remove me, should no longer be needed
-        //if(num < 2 || num > 4) { //If we're trying to spawn an invalid # of player
-        //    Debug.LogError("Invalid number of players: " + num);
-        //    return;
-        //}
 
         Players = new List<PlayerController>(); //Clear the list
 
@@ -135,19 +123,7 @@ public class GameManager : Singleton<GameManager> {
     public void StartRound(){
         roundTimer = 0; //Reset timer to 0
         state = State.Playing; //Now we're playing!
-        gameOverCamera.gameObject.SetActive(false);
         SharedUIManager.Instance.ShowTimer();
-    }
-
-    public void EndGame(int winner){
-        SharedUIManager.Instance.HideTimer();
-        gameOverCamera.gameObject.SetActive(true);
-        gameOverCamera.depth = 1; //Set it to render at the front
-        state = State.EndGame;
-
-        if(winner == -1){ //Time ran out
-            
-        }
     }
 
     public void LoadLevel(string level){
