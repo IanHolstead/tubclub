@@ -831,7 +831,7 @@ MonoBehaviour:
     m_RotationOrder: 0
   radius: 0
   radiusVelocity: 0
-  HarpoonPrefab: {fileID: 1527333090903076, guid: 824d61d708707a04d9aca4016ec4ed17,
+  HarpoonPrefab: {fileID: 1525496882813482, guid: a2a2b2213161de549b70e70e5ba717e2,
     type: 2}
   PlayerNum: 1
   HarpoonInitialVelocityMagnitude: 100
