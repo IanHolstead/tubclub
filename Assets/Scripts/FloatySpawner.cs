@@ -6,6 +6,7 @@ public class FloatySpawner : Singleton<FloatySpawner> {
 
 	[Header("Spawn Variables")]
 	public GameObject[] FloatyPrefabs;
+	public GameObject FloatySkeletonPrefab;
 	public bool IsSpawning;
 	public float SpawnRate;
 	public float MinSpawnRadius;
@@ -30,11 +31,22 @@ public class FloatySpawner : Singleton<FloatySpawner> {
 	}
 
 	public void SpawnNewFloaty(){
-		GameObject newFloaty = Instantiate(FloatyPrefabs[GetRandomFloatyIndex()], GetRandomSpawnPoint(), Quaternion.identity) as GameObject;
+		GameObject newFloaty = Instantiate(FloatyPrefabs[GetRandomFloatyIndex()]) as GameObject;
+		
+		Vector3 displacement = newFloaty.transform.position;
+		Vector3 spawnPoint = GetRandomSpawnPoint();
+
 		float x = Random.Range(0, 360);
 		float y = Random.Range(0, 360);
 		float z = Random.Range(0, 360);
 		newFloaty.transform.eulerAngles = new Vector3(x, y, z);
+
+		
+
+		newFloaty.transform.position = spawnPoint + displacement;
+
+		GameObject newFloatySkeleton = Instantiate(FloatySkeletonPrefab, spawnPoint, Quaternion.identity) as GameObject;
+		newFloaty.transform.SetParent(newFloatySkeleton.transform.GetChild(0));
 	}
 
 	public int GetRandomFloatyIndex(){

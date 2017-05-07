@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     public AnimationCurve RotationSpeedOverRadius; //Left, 0 | Right, 1 Sample this curve for rotation speed in degrees per second
     public float radius; //Radius of our orbit, distance from 0, 0
     public float radiusVelocity; //Positive => increasing radius
+    public float maxRadius;
 
     [Header("Prefab References")]
     public GameObject HarpoonPrefab;
@@ -161,6 +162,9 @@ public class PlayerController : MonoBehaviour {
     void UpdatePhysics(){
         radius = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2)); //Get radius
         radius += radiusVelocity * Time.deltaTime;
+        if(radius >= maxRadius){
+            radius = maxRadius;
+        }
         float angle = Mathf.Atan2(transform.position.x, transform.position.z) * Mathf.Rad2Deg; //Get our angle relative to 0,0
         if(angle < 0){ //If our angle is negative, we're under the x-axis
             angle += 360; //Add 360 degrees

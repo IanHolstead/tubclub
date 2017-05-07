@@ -36,7 +36,7 @@ public class GameOverController : MonoBehaviour {
         }
         else
         {
-            MusicManager.Instance.SetMainGameMusicPitch(1);
+            // MusicManager.Instance.SetMainGameMusicPitch(1);
         }
     }
 
