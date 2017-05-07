@@ -57,6 +57,8 @@ public class GameOverController : MonoBehaviour {
         gameOverCamera.depth = 1; //Set it to render at the front
         GameManager.Instance.state = GameManager.State.EndGame;
 
+        FloatySpawner.Instance.IsSpawning = false;
+
         if (winner == -1)
         { //Time ran out
 
