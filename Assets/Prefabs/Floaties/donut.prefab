@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33647750318243812}
   - component: {fileID: 23989407294411798}
   - component: {fileID: 135172973400929352}
+  - component: {fileID: 114546267184145512}
   m_Layer: 0
   m_Name: donut
   m_TagString: Untagged
@@ -88,6 +89,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055032635257098}
   m_Mesh: {fileID: 4300000, guid: b30eeb2222fa76f40a0de68ed5a47368, type: 3}
+--- !u!114 &114546267184145512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055032635257098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515d615a2fe92e64aa8b6853f521b8e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135172973400929352
 SphereCollider:
   m_ObjectHideFlags: 1

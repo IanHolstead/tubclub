@@ -24,17 +24,6 @@ public class Floaties : MonoBehaviour {
         TestRadius();
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            PlayerController hitPlayer = other.GetComponent<PlayerController>();
-            if (hitPlayer != null)
-            {
-                hitPlayer.Stun();
-            }
-        }
-    }
 
     void UpdatePhysics()
     {

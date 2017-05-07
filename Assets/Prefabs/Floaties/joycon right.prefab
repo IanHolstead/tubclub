@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33029314855457458}
   - component: {fileID: 23573152313365282}
   - component: {fileID: 65354781968072990}
+  - component: {fileID: 114350005808882838}
   m_Layer: 0
   m_Name: joycon right
   m_TagString: Untagged
@@ -94,3 +95,14 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.002828166, y: 0.0015704378, z: 0.007220068}
   m_Center: {x: 0.0000048036122, y: -0.0004406036, z: 0.0036324689}
+--- !u!114 &114350005808882838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703882997090854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515d615a2fe92e64aa8b6853f521b8e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
