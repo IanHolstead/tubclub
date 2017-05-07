@@ -155,6 +155,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4002620164716142, guid: 69f7cfb8c1afc234b898668e6b2841b9, type: 2}
       propertyPath: m_LocalPosition.x
       value: -1.5873852
@@ -191,6 +196,81 @@ Prefab:
         type: 2}
       propertyPath: numberOfPlayers
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: RoundTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[0].inSlope
+      value: 0.0028467681
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[0].outSlope
+      value: 0.0028467681
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[1].time
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[1].value
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[1].inSlope
+      value: 0.06805504
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[1].outSlope
+      value: 0.06805504
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraPosition.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[2].time
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[2].inSlope
+      value: 0.00000022765602
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[2].outSlope
+      value: 0.00000022765602
+      objectReference: {fileID: 0}
+    - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
+        type: 2}
+      propertyPath: EndGameCameraLerp.m_Curve.Array.data[2].tangentMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69f7cfb8c1afc234b898668e6b2841b9, type: 2}

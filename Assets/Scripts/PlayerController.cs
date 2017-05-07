@@ -87,6 +87,10 @@ public class PlayerController : MonoBehaviour {
         //}
     }
 
+    void OnDestroy(){
+        ControllerManager.instance.ReturnGamePad(PlayerNum-1);
+    }
+
     public void Setup(int playerNum){ //Public call to setup our player
         this.PlayerNum = playerNum; //Set our player number
         this.name = "Player " + PlayerNum; //Set our name
