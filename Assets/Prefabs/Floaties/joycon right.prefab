@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23573152313365282}
   - component: {fileID: 65354781968072990}
   - component: {fileID: 114350005808882838}
+  - component: {fileID: 54045598658223200}
   m_Layer: 0
   m_Name: joycon right
   m_TagString: Untagged
@@ -83,6 +84,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1703882997090854}
   m_Mesh: {fileID: 4300000, guid: 3394406c6a3816740aa771315918a8c9, type: 3}
+--- !u!54 &54045598658223200
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1703882997090854}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65354781968072990
 BoxCollider:
   m_ObjectHideFlags: 1

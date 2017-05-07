@@ -832,6 +832,31 @@ MonoBehaviour:
   radius: 0
   radiusVelocity: 0
   maxRadius: 11
+  minRadius: 0.9
+  StearingAmountOverRadius:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 10
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 10.5
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   HarpoonPrefab: {fileID: 1525496882813482, guid: a2a2b2213161de549b70e70e5ba717e2,
     type: 2}
   PlayerNum: 1
