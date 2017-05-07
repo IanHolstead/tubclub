@@ -16,7 +16,6 @@ public class GameOverController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
         gameOverCamera.gameObject.SetActive(false);
         isGameEnding = false;
     }
@@ -27,9 +26,11 @@ public class GameOverController : MonoBehaviour {
         if (isGameEnding)
         {
             gameOverCamera.transform.position = Vector3.Lerp(StartGameCameraPosition, EndGameCameraPosition, EndGameCameraLerp.Evaluate(endGameTimer));
+            MusicManager.Instance.SetMainGameMusicPitch(1 - EndGameCameraLerp.Evaluate(endGameTimer));
             endGameTimer += Time.deltaTime;
             if (EndGameCameraLerp.Evaluate(endGameTimer) >= 1)
             {
+                MusicManager.Instance.SetMainGameMusicPitch(0);
                 SharedUIManager.Instance.ShowGameOverMenu();
             }
         }

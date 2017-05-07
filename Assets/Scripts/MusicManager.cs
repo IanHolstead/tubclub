@@ -28,8 +28,6 @@ public class MusicManager : Singleton<MusicManager> {
 	// Update is called once per frame
 	void Update () {
 		QueueNextSection();
-		Debug.Log(GetFractionUntilMainGameMusicStart());
-		Debug.Log(GetFractionUntilMainGameBeatDrop());
 	}
 
 	public void PlayMainGameMusic(){
@@ -45,6 +43,10 @@ public class MusicManager : Singleton<MusicManager> {
 
 	public float GetFractionUntilMainGameBeatDrop(){
 		return (float)((mainGameMusicBeatDropTime - AudioSettings.dspTime)/(mainGameMusicBeatDropTime - mainGameMusicStartTime));
+	}
+
+	public void SetMainGameMusicPitch(float pitch){
+		MainGameMusic.pitch = pitch;
 	}
 
 	public void ResetAllMusic(){
@@ -87,8 +89,8 @@ public class MusicManager : Singleton<MusicManager> {
 						NextLoopSection = 0;
 					}
 
-					Debug.Log("C: " + CurrentLoopSection);
-					Debug.Log("N: " + NextLoopSection);
+					// Debug.Log("C: " + CurrentLoopSection);
+					// Debug.Log("N: " + NextLoopSection);
 
 					audioTimer += IntroLoopSections[NextLoopSection].clip.length;
 				}

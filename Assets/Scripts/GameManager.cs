@@ -43,12 +43,16 @@ public class GameManager : Singleton<GameManager> {
                 //TODO
             break;
             case State.Countdown:
+                SharedUIManager.Instance.SetCircleTransitioner(MusicManager.Instance.GetFractionUntilMainGameBeatDrop());
                 if(MusicManager.Instance.GetFractionUntilMainGameBeatDrop() <= 0){
+                    SharedUIManager.Instance.HideCircleTransitioner();
                     StartRound();
                 }
             break;
             case State.WaitingForMusicSync:
+                MainMenuManager.Instance.SetFaderAlpha(1.0f - (float)MusicManager.Instance.GetFractionUntilMainGameMusicStart());
                 if(MusicManager.Instance.GetFractionUntilMainGameMusicStart() <= 0){
+
                     state = State.Spawning;
                     LoadLevel("MainGame"); //Load the main game scene
                 }

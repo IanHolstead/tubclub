@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MainMenuManager : MonoBehaviour {
+public class MainMenuManager : Singleton<MainMenuManager> {
 
 	[Header("Canvas References")]
+	public CanvasGroup Fader;
 	public GameObject MainMenuCanvas;
 	public GameObject CreditsCanvas;
 	public GameObject PlayerSelectCanvas;
@@ -56,5 +57,9 @@ public class MainMenuManager : MonoBehaviour {
 	public void StartGame(int players){ //Start game with given # of players
 		MusicManager.Instance.PlayMainGameMusic();
 		GameManager.Instance.StartGame(players); //Tell teh game manager instance to start the game
+	}
+
+	public void SetFaderAlpha(float alpha){
+		Fader.alpha = alpha;
 	}
 }

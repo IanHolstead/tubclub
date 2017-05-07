@@ -200,7 +200,7 @@ Prefab:
     - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
         type: 2}
       propertyPath: RoundTime
-      value: 100000
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 114411325135130472, guid: 69f7cfb8c1afc234b898668e6b2841b9,
         type: 2}

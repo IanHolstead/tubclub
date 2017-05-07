@@ -841,6 +841,8 @@ MonoBehaviour:
   horizontalRange: 90
   cameraX: 0
   cameraY: 0
+  LeftCannon: {fileID: 0}
+  RightCannon: {fileID: 0}
   meshRef: {fileID: 1882402823558478}
   camera: {fileID: 20003657883734180}
   UICanvas: {fileID: 1975278313701736}
@@ -882,7 +884,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.25
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
