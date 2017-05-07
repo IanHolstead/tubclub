@@ -432,6 +432,9 @@ MonoBehaviour:
   - {fileID: 1197652501}
   - {fileID: 1205293908}
   - {fileID: 362591726}
+  MainGameMusic: {fileID: 1814824608}
+  MainGameMusicIsQueued: 0
+  MainGameMusicIsPlaying: 0
   LastLoopSection: 0
   CurrentLoopSection: 0
   NextLoopSection: 0
@@ -741,7 +744,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: aba50d9ee35c8484dbe658e83269a41c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 80afb1d64c444ce4695822fc5062594b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

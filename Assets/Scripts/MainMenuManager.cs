@@ -54,6 +54,7 @@ public class MainMenuManager : MonoBehaviour {
 	}
 	
 	public void StartGame(int players){ //Start game with given # of players
+		MusicManager.Instance.PlayMainGameMusic();
 		GameManager.Instance.StartGame(players); //Tell teh game manager instance to start the game
 	}
 }
