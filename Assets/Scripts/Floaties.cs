@@ -24,6 +24,18 @@ public class Floaties : MonoBehaviour {
         TestRadius();
 	}
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            PlayerController hitPlayer = other.GetComponent<PlayerController>();
+            if (hitPlayer != null)
+            {
+                hitPlayer.Stun();
+            }
+        }
+    }
+
     void UpdatePhysics()
     {
         radius = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2)); //Get radius

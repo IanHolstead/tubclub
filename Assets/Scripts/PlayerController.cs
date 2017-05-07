@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
         if (GameManager.Instance.state == GameManager.State.Countdown)
         {
             UpdatePhysics();
-            UpdateCamera();
+            UpdateCamera(true);
         }
         else if (GameManager.Instance.state == GameManager.State.Playing )
         {
@@ -92,12 +92,19 @@ public class PlayerController : MonoBehaviour {
             {
                 case State.Disabled:
                     timeSinceLastHit += Time.deltaTime;
-                    UpdatePhysics();
-                    UpdateCamera();
+                    if (timeSinceLastHit < disabledTime)
+                    {
+                        UpdatePhysics();
+                        UpdateCamera(true);
+                    }
+                    else
+                    {
+                        state = State.Alive;
+                    }
                     break;
                 case State.Alive:
                     UpdateSteering();
-                    UpdateCamera();
+                    UpdateCamera(true);
                     UpdateHarpoon();
                     UpdatePhysics();
                     break;
@@ -105,7 +112,9 @@ public class PlayerController : MonoBehaviour {
                 case State.Paused:
 
                     break;
-
+                case State.Dead:
+                    UpdateCamera(false);
+                    break;
             }
         }
     }
@@ -133,7 +142,9 @@ public class PlayerController : MonoBehaviour {
 
     public void HitByHarpoon(){
         state = State.Dead;
-        //TODO: add effects
+        //gameObject.AddComponent<Floaties>();
+        Destroy(this, .5f);
+        //TODO: fade to black
     }
 
     void SetLayerRecursive(Transform obj, string layerName){
@@ -167,10 +178,15 @@ public class PlayerController : MonoBehaviour {
         radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * stearingAmount;
     }
 
-    void UpdateCamera(){
-        float newCameraX = gamepad.GetAxis(AxisCode.GamepadAxisRightX);
-        float newCameraY = -gamepad.GetAxis(AxisCode.GamepadAxisRightY);
+    void UpdateCamera(bool allowPlayerControl){
+        float newCameraX = 0;
+        float newCameraY = 0;
+        if (allowPlayerControl)
+        {
+            newCameraX = gamepad.GetAxis(AxisCode.GamepadAxisRightX);
+            newCameraY = -gamepad.GetAxis(AxisCode.GamepadAxisRightY);
 
+        }
         //TODO: this should depend on delta time
         newCameraX = Mathf.Lerp(cameraX, GameFunctions.MapRange(newCameraX, 0, 1, 0, horizontalRange), .4f);
         newCameraY = Mathf.Lerp(cameraY, GameFunctions.MapRange(newCameraY, 0, 1, 0, verticalRange), .4f);
@@ -183,7 +199,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void UpdateHarpoon(){
-        Vector3 start = transform.position;// + meshRef.transform.up * .3f; //The initial positon of the harpoon
+        Vector3 start = (LeftCannon.transform.position + RightCannon.transform.position)/2;// + meshRef.transform.up * .3f; //The initial positon of the harpoon
         Vector3 vel = (camera.transform.forward*2 + camera.transform.up).normalized * HarpoonInitialVelocityMagnitude; //The initial velocity vector of the harpoon
 
         //Calculate timestep, sample points on line to find trajectory, set linerenderer points
@@ -192,15 +208,22 @@ public class PlayerController : MonoBehaviour {
         List<Vector3> points = SampleTrajectoryPoints(start, vel, timeStep, maxTime);
         lr.positionCount = points.Count;
         lr.SetPositions(points.ToArray());
-        UpdateCanonAngles(vel);
+        UpdateCanonAngles(start, vel);
 
         if(gamepad.GetButtonDown(ActionKeyCode.GamepadRightTrigger)){
             HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
             harpoonSpawn.Fire(PlayerNum, vel, HarpoonInitialVelocityMagnitude);
         }
     }
+
+    public void Stun()
+    {
+        state = State.Disabled;
+        timeSinceLastHit = 0f;
+        lr.positionCount = 0;
+    }
     
-    void UpdateCanonAngles( Vector3 vel)
+    void UpdateCanonAngles(Vector3 start, Vector3 vel)
     {
         GameObject cannon;
         if (cameraX >= 0) 
@@ -212,9 +235,9 @@ public class PlayerController : MonoBehaviour {
             cannon = LeftCannon;
         }
 
-        Debug.DrawRay(cannon.transform.position + Vector3.up * .3f, Quaternion.LookRotation(vel).eulerAngles);
+        Debug.DrawRay(start, Quaternion.LookRotation(vel).eulerAngles, Color.red);
         
-        cannon.transform.rotation = Quaternion.Euler(Vector3.Lerp(cannon.transform.rotation.eulerAngles.normalized, Quaternion.LookRotation(vel).eulerAngles, .3f));
+        cannon.transform.rotation = Quaternion.Euler(Vector3.Lerp(cannon.transform.rotation.eulerAngles.normalized, Quaternion.LookRotation(vel).eulerAngles, 1f));
         
     }
 }
