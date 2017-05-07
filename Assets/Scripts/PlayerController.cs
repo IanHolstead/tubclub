@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour {
     public float radius; //Radius of our orbit, distance from 0, 0
     public float radiusVelocity; //Positive => increasing radius
     public float maxRadius;
+    public float minRadius;
+    public AnimationCurve StearingAmountOverRadius; //Left, 0 | Right, 1 Sample this curve for rotation speed in degrees per second
+
 
     [Header("Prefab References")]
     public GameObject HarpoonPrefab;
@@ -50,25 +53,25 @@ public class PlayerController : MonoBehaviour {
     public float disabledTime = 3f;
     float timeSinceLastHit;
 
-    void Awake(){
+    void Awake() {
         lr = GetComponent<LineRenderer>();
     }
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         timeSinceLastHit = disabledTime;
     }
 
-    public Vector3 SampleTrajectory (Vector3 initialPosition, Vector3 initialVelocity, float time) {
-        return initialPosition + (initialVelocity*time) + (Physics.gravity*time*time*0.5f);
+    public Vector3 SampleTrajectory(Vector3 initialPosition, Vector3 initialVelocity, float time) {
+        return initialPosition + (initialVelocity * time) + (Physics.gravity * time * time * 0.5f);
     }
 
-    public List<Vector3> SampleTrajectoryPoints (Vector3 initialPosition, Vector3 initialVelocity, float timeStep, float maxTime) {
+    public List<Vector3> SampleTrajectoryPoints(Vector3 initialPosition, Vector3 initialVelocity, float timeStep, float maxTime) {
         List<Vector3> points = new List<Vector3>();
         float t = 0;
-        while(t < maxTime){ //While we're not done sampling
-            Vector3 pos = SampleTrajectory (initialPosition, initialVelocity, t); //Get the position of the sample point
+        while (t < maxTime) { //While we're not done sampling
+            Vector3 pos = SampleTrajectory(initialPosition, initialVelocity, t); //Get the position of the sample point
             // if (Physics.Linecast (prev,pos)){
             //     break;
             // } 
@@ -87,7 +90,7 @@ public class PlayerController : MonoBehaviour {
             UpdatePhysics();
             UpdateCamera(true);
         }
-        else if (GameManager.Instance.state == GameManager.State.Playing )
+        else if (GameManager.Instance.state == GameManager.State.Playing)
         {
             switch (state)
             {
@@ -97,6 +100,7 @@ public class PlayerController : MonoBehaviour {
                     {
                         UpdatePhysics();
                         UpdateCamera(true);
+                        //radiusVelocity /= .5f*Time.deltaTime;
                     }
                     else
                     {
@@ -121,17 +125,20 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void OnDestroy(){
-        ControllerManager.instance.ReturnGamePad(PlayerNum-1);
+    void OnDestroy() {
+        gamepad.EndVibration();
+        ControllerManager.instance.ReturnGamePad(PlayerNum - 1);
     }
 
-    public void Setup(int playerNum){ //Public call to setup our player
+    public void Setup(int playerNum) { //Public call to setup our player
         this.PlayerNum = playerNum; //Set our player number
         this.name = "Player " + PlayerNum; //Set our name
         this.state = State.Alive;
-        gamepad = ControllerManager.instance.RequestSpecificGamepad(PlayerNum-1); //Get our gamepad reference
+        gamepad = ControllerManager.instance.RequestSpecificGamepad(PlayerNum - 1); //Get our gamepad reference
+        gamepad.TriggerSensitivity = .35f;
+
         SetLayerRecursive(UICanvas.transform, "UI Player " + PlayerNum); //Set the player's UI's layer
-        
+
         //Turn off all the layer masks for each player UI
         camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 1"));
         camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 2"));
@@ -139,14 +146,19 @@ public class PlayerController : MonoBehaviour {
         camera.cullingMask &= ~(1 << LayerMask.NameToLayer("UI Player 4"));
 
         //Turn on ONLY our layer mask
-        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum ));
+        camera.cullingMask |= (1 << LayerMask.NameToLayer("UI Player " + PlayerNum));
     }
-
-    public void HitByHarpoon(){
+    void Die()
+    {
+        gamepad.SetVibration(1, 1, 1);
         state = State.Dead;
         //gameObject.AddComponent<Floaties>();
         Destroy(this, .5f);
         //TODO: fade to black
+    }
+
+    public void HitByHarpoon(){
+        Die();
     }
 
     void SetLayerRecursive(Transform obj, string layerName){
@@ -172,6 +184,10 @@ public class PlayerController : MonoBehaviour {
         if(radius >= maxRadius){
             radius = maxRadius;
         }
+        if (radius < minRadius)
+        {
+            Die();
+        }
         float angle = Mathf.Atan2(transform.position.x, transform.position.z) * Mathf.Rad2Deg; //Get our angle relative to 0,0
         if(angle < 0){ //If our angle is negative, we're under the x-axis
             angle += 360; //Add 360 degrees
@@ -182,11 +198,12 @@ public class PlayerController : MonoBehaviour {
         Vector3 newPos = new Vector3(Mathf.Sin(angle) * radius, transform.position.y, Mathf.Cos(angle) * radius); //Calculate their new position
         transform.position = newPos; //Set the new position
         transform.rotation = Quaternion.AngleAxis((angle * Mathf.Rad2Deg) - 90, Vector3.up);
+        //gamepad.SetVibration(0f, GameFunctions.MapRangeClamped(radius, 1, 7, .75f, 0));
     }
 
     void UpdateSteering(){
         //radius = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2));
-        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * stearingAmount;
+        radiusVelocity = gamepad.GetAxis(AxisCode.GamepadAxisLeftX) * stearingAmount * StearingAmountOverRadius.Evaluate(radius);
     }
 
     void UpdateCamera(bool allowPlayerControl){
@@ -217,7 +234,7 @@ public class PlayerController : MonoBehaviour {
         float maxTime = 5.0f;
         float timeStep = maxTime/HarpoonTrajectorySamples;
         List<Vector3> points = SampleTrajectoryPoints(start, vel, timeStep, maxTime);
-        lr.positionCount = points.Count;
+        lr.positionCount = points.Count; 
         lr.SetPositions(points.ToArray());
         UpdateCanonAngles(start, vel);
 
@@ -230,6 +247,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Stun()
     {
+        gamepad.SetVibration(.75f, .25f, .75f);
         state = State.Disabled;
         timeSinceLastHit = 0f;
         lr.positionCount = 0;
