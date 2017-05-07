@@ -22,8 +22,6 @@ public class SimpleFloat : MonoBehaviour {
 		time += Time.deltaTime;
 		float height = bobAmount/2 * Mathf.Sin((time * bobRate) * Mathf.PI * 2) - bobAmount/2;
 		height *= -1;
-		Debug.Log(height);
-
 		transform.position = new Vector3(origin.x, origin.y + height, origin.z);
 	}
 }
