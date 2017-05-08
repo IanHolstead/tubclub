@@ -41,6 +41,7 @@ public class GameOverController : MonoBehaviour {
     }
 
 	public void GoToMainMenu(){
+        MusicManager.Instance.SetMainGameMusicPitch(1);
         MusicManager.Instance.ResetAllMusic();
 		GameManager.Instance.LoadLevel("MainMenu");
 	}

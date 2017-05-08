@@ -64,6 +64,7 @@ public class GameManager : Singleton<GameManager> {
     void OnLevelWasLoaded(){ //Called once level was loaded (duh)
         switch(state){ //Depending on state
             case State.Spawning: //If we're supposed to be spawning,
+                MusicManager.Instance.SetMainGameMusicPitch(1);
                 gameOverController = FindObjectOfType<GameOverController>();
                 SpawnPlayers(numberOfPlayers); //Spawn the players
             break;
