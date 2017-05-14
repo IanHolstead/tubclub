@@ -65,6 +65,7 @@ public class GameManager : Singleton<GameManager> {
         switch(state){ //Depending on state
             case State.Spawning: //If we're supposed to be spawning,
                 MusicManager.Instance.SetMainGameMusicPitch(1);
+                MusicManager.Instance.MainGameMusic.Play();
                 gameOverController = FindObjectOfType<GameOverController>();
                 SpawnPlayers(numberOfPlayers); //Spawn the players
             break;

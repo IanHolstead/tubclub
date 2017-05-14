@@ -32,6 +32,7 @@ public class MusicManager : Singleton<MusicManager> {
 
 	public void PlayMainGameMusic(){
 		MainGameMusicIsQueued = true;
+		MainGameMusic.volume = 0.5f;
 		initialMainGameMusicQueueTime = AudioSettings.dspTime;
 		mainGameMusicStartTime = initialMainGameMusicQueueTime + (IntroLoopSections[CurrentLoopSection].clip.length - IntroLoopSections[CurrentLoopSection].time);
 		mainGameMusicBeatDropTime = mainGameMusicStartTime + mainGameMusicBeatDropTimeOffest;
