@@ -62,10 +62,10 @@ public class FloatySpawner : Singleton<FloatySpawner> {
 		return new Vector3(x, y, z);
 	}
 
-	private void OnDrawGizmos(){
-		UnityEditor.Handles.color = Color.red;
-		UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, MinSpawnRadius);
-		UnityEditor.Handles.color = Color.green;
-		UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, MaxSpawnRadius);
-	}
+	//private void OnDrawGizmos(){
+	//	UnityEditor.Handles.color = Color.red;
+	//	UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, MinSpawnRadius);
+	//	UnityEditor.Handles.color = Color.green;
+	//	UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, MaxSpawnRadius);
+	//}
 }

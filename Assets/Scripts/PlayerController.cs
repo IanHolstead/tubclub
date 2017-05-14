@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour {
         List<Vector3> points = SampleTrajectoryPoints(start, vel, timeStep, maxTime);
         lr.positionCount = points.Count; 
         lr.SetPositions(points.ToArray());
-        UpdateCanonAngles(start, vel);
+        //UpdateCanonAngles(start, vel);
 
         if(gamepad.GetButtonDown(ActionKeyCode.GamepadRightTrigger)){
             HarpoonController harpoonSpawn = Instantiate(HarpoonPrefab, start, Quaternion.identity).GetComponent<HarpoonController>();
